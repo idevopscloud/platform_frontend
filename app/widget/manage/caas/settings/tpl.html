@@ -1,0 +1,62 @@
+<div class="col-lg-12">
+    <div class="panel-body">
+        <div class="primary-section">
+            <h2>欢迎来到CaaS管理</h2>
+        </div>
+    </div>
+</div>
+<div class='clearfix'></div>
+<form id='form-caas-new' role="form" action="" method="post" >
+    <input name='caas_icon_path' type='hidden' />
+    <fieldset class='full-page'>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class='col-lg-8 col-lg-offset-2'>
+                    <h3>CaaS基本信息设置</h3>
+                    <div class="form-group">
+                        <label for='caas-icons'>图标</label>
+                        <input id="caas-icons" name="icon" type="file" class="file-loading">
+                    </div>
+                    <div class="form-group col-lg-5 row">
+                        <div class="col-lg-12 no-padding">
+                            <label for='caas-name'>名称</label>
+                            <input id='caas-name' name="name" type="text" class="form-control" placeholder="请输入CaaS名称"  />
+                        </div>
+                        <div class="col-lg-12 no-padding">
+                            <label for='caas-decription'>描述</label>
+                            <textarea rows='10' id='caas-decription' name="description" type="text" class="form-control" placeholder="请描述CaaS功能和用途" />
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-5 pull-right">
+                        <label class='col-lg-12 no-padding'>团队成员</label>
+                        <div class="col-lg-10 no-padding">
+                            <div class="input-group">
+                                <select class="form-control member-search" multiple="" tabindex="-1" aria-hidden="true"></select>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-primary dropdown-toggle member-add" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">添加成员</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='col-lg-10' style='padding: 0; margin-top:5px;'>
+                            <table class='table table-bordered table-member'>
+                                <thead>
+                                    <th>姓名</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class='col-lg-1 col-lg-offset-1' style='padding: 0; margin-top:5px;'>
+                            <button class='btn btn-xs btn-warning do-remove-member'>移除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer btn-env-group">
+                <button class='btn btn-default do-new'>完成</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<link href="app/libs/fileinput/css/fileinput.min.css" rel="stylesheet">

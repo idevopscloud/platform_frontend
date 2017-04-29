@@ -1,0 +1,171 @@
+<div id="msg_placeholder"></div>
+<div class="row  nav-buttons">
+	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+		<a class="btn btn-primary" id="apply">新增角色</a>
+        <a class="btn btn-primary" id="role_menu">角色关联菜单</a>
+        <a class="btn btn-primary" id="role_api">角色关联接口</a>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 font-14">	
+
+		<table class="table table-hover" id='process-list'>
+			<thead>
+				<th>ID</th>
+				<th>角色名称</th>
+				<th>角色描述</th>
+				<th>成员个数</th>
+				<th width="300">操作</th>
+			</thead>
+			<tbody id="tableBox">
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="pageBox"></div>
+
+<div class="modal fade" id="settingModal" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                分组
+            </div>
+            <div class="modal-body">
+            	<form class="form-horizontal" id="modal-form">
+            		<div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">名称</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<input id="name" name="name" type="text" class="form-control" placeholder="请输入名称" />
+	                	</div>
+	                </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">描述</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <input id="description" name="description" type="text" class="form-control" placeholder="请输入描述" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn btn-default" id="back" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="saveSetting">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="roleMenuModal" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                角色关联菜单
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="userModalForm">
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">角色名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select multiple="multiple" id='role' name="roles[]" placeholder="请选择角色"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">菜单名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select multiple="multiple" id='menu' name="menus[]" placeholder="请选择菜单"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="backDo" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="grantRoleMenu">加入</button>
+                <button type="button" class="btn btn-primary" id="stripRoleMenu">离开</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="roleApiModal"   role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                角色关联接口
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="userRoleForm">
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">角色名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select multiple="multiple"  id='roles' name="roles[]" placeholder="请输入角色"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">接口名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select multiple="multiple" id='apis' name="apis[]" placeholder="请输入接口"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="backToUser" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="grantRoleApi">授予</button>
+                <button type="button" class="btn btn-primary" id="stripRoleApi">剥夺</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userModal"   role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:15px 0px 0px 15px;">
+                <h2 class="modal-title">成员</h2>
+                <table class="table table-custom nomargin">
+                    <thead>
+                    <tr>
+                        <th style="width:40px;">ID</th>
+                        <th>用户名</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-body" style="padding:5px 15px;height:220px;overflow: auto;">
+                <table class="table table-custom nomargin">
+                    <tbody id="userBody"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  Modals -->
+<div class="modal fade col-md-12" id="showModal"   role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="col-md-8 col-md-offset-4">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:15px 0px 0px 15px;">
+                <h2 class="modal-title">角色详情</h2>
+            </div>
+            <div class="" style="padding:5px 15px;height:480px;overflow: auto;">
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label class="col-md-12" for="show_menu_tree">菜单</label>
+                        <div class="col-md-12">
+                            <div class="dd transparent" id="show_menu_tree"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary act-sync">授权</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

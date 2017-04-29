@@ -1,0 +1,225 @@
+<link href="app/libs/multipicker/multipicker.min.css" rel="stylesheet">
+<h2 class="ui header">欢迎来到集群管理</h2>
+<!-- <p>这里汇集了平台管理的所有集群信息，在创建新的集群之前请先在您的物理机安装，安装说明<i class="help circle  icon"></i></p>
+<div class="ui ignored warning message">下载并执行<b>bash ido.sh</b> 将会安装ido cluter到您的物理机，并附带registry服务，返回数据:<code>{paas_api_url:****, registry_host: ***}</code>将返回的数据填写如创建的表单.</div> -->
+<table class="ui celled selectable table">
+    <thead>
+        <tr>
+            <th>集群名称</th>
+            <th>Registry服务</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+<tbody id="cluster-box"></tbody>
+<tfoot class="full-width">
+<tr>
+    <th colspan="4">
+        <a class='btn btn-default btn-navy btn-fill-horz add-cluster'>
+            <span class="glyphicon glyphicon-plus-sign"></span><p>新的集群</p>
+        </a>
+    </th>
+</tr>
+</tfoot>
+</table>
+<div class="col-lg-12 no-padding cluster-ngs" style="display: none">
+<div class="ui top secondary pointing menu">
+    <div class="active item">
+        环境
+    </div>
+</div>
+<div class="ui bottom attached active tab">
+    <table class="ui compact celled definition table">
+        <thead class="full-width">
+            <tr>
+                <th></th>
+                <th>环境名称</th>
+                <th>节点</th>
+                <th>有权限团队</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+    <tbody></tbody>
+    <tfoot class="full-width">
+    <tr>
+        <th>
+            <a class='btn btn-default btn-navy btn-fill-horz new-ng'>
+                <span class="glyphicon glyphicon-plus-sign"></span><p>添加环境</p>
+            </a>
+        </th>
+        <th colspan="4">
+            <div class="ui floating labeled icon dropdown button grant">
+                <i class="add user icon"></i>
+                <span class="default text">授予团队使用权</span>
+                <div class="menu">
+                    <div class="header">
+                        团队
+                    </div>
+                </div>
+            </div>
+            <div class="ui floating labeled icon dropdown button strip">
+                <i class="remove user icon"></i>
+                <span class="default text">剥夺团队使用权</span>
+                <div class="menu">
+                    <div class="header">
+                        团队
+                    </div>
+                </div>
+            </div>
+        </th>
+    </tr>
+    </tfoot>
+</table>
+</div>
+</div>
+<div class="ui modal small" id="modal-new">
+<div class="header">
+<h4>集群创建</h4>
+</div>
+<div class="content">
+<form class="form-horizontal" id="form-new" autocomplete="off">
+    <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>名称</label>
+        <div class="col-lg-8">
+            <input id="name" name="name" type="text" class="form-control" placeholder="请输入cluster名称" />
+        </div>
+        <label class="col-lg-3" for="name"></label>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>服务地址</label>
+        <div class="col-lg-8">
+            <input id="paas_api_url" name="paas_api_url" type="text" class="form-control" placeholder="请输入PaaS API服务地址" />
+        </div>
+        <label class="col-lg-3" for="paas_api_url"></label>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>K8S服务地址</label>
+        <div class="col-lg-8">
+            <input id="k8s_endpoint" name="k8s_endpoint" type="text" class="form-control" placeholder="请输入K8S服务地址" />
+        </div>
+        <label class="col-lg-3" for="k8s_endpoint"></label>
+    </div>
+    <!-- <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>健康检查</label>
+        <div class="col-lg-8">
+            <input id="health_check" name="health_check" type="text" class="form-control" placeholder="输入健康检查地址" />
+        </div>
+        <label class="col-lg-3" for="health_check"></label>
+    </div> -->
+    <div class="form-group">
+        <label class="col-lg-3 text-right">Registry服务</label>
+        <div class="col-lg-8 ui toggle checkbox">
+            <input type="checkbox" name="public">
+            <label style="line-height: inherit !important;">自定义(默认使用集群自带Registry服务)</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 text-right"></label>
+        <div class="col-lg-8">
+            <div class=" ui input">
+                <input name="registry_name" type="text" class="form-control registry-attr" placeholder="请为Registry取个名" style="display: none" />
+            </div>
+            <div class=" ui input">
+                <input name="registry_host" type="text" class="form-control registry-attr" placeholder="输入Registry服务地址" style="display: none" />
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<div class="actions">
+<div class="ui approve button positive" id="do-new">确认</div>
+<div class="ui deny black button">取消</div>
+</div>
+</div>
+
+<div class="ui modal small" id="modal-info">
+<div class="header">
+<h4>详细信息</h4>
+</div>
+<div class="content"></div>
+<div class="actions">
+<div class="ui approve button positive">确认</div>
+</div>
+</div>
+
+<div class="ui modal small" id="modal-ng">
+<div class="header">
+<h4>环境创建</h4>
+</div>
+<div class="content">
+<form class="form-horizontal" id="form-ng" autocomplete="off">
+    <input name="cluster" type="hidden" />
+    <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>环境名称</label>
+        <div class="col-lg-8">
+            <input id="name" name="name" type="text" class="form-control" placeholder="请为环境取个名称" />
+        </div>
+        <label class="col-lg-3" for="name"></label>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 text-right">生产环境</label>
+        <div class="col-lg-8">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" name="product">
+                <label style="line-height: inherit !important;"></label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>选择节点</label>
+        <div class="col-lg-8" class="col-lg-8" id="nodes"></div>
+    </div>
+</form>
+</div>
+<div class="actions">
+<div class="ui approve button positive" id="do-new-ng">确认</div>
+<div class="ui deny black button">取消</div>
+</div>
+</div>
+
+<div class="ui modal small" id="modal-ng-node-edit">
+<div class="header">
+<h4>节点操作</h4>
+</div>
+<div class="content">
+<form class="form-horizontal" id="form-ng-node" autocomplete="off">
+    <input name="cluster" type="hidden" />
+    <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>环境名称</label>
+        <div class="col-lg-8">
+            <input name="name" readonly type="text" class="form-control" placeholder="请为环境取个名称" />
+        </div>
+        <label class="col-lg-3" for="name"></label>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 text-right">生产环境</label>
+        <div class="col-lg-8">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" name="product">
+                <label style="line-height: inherit !important;"></label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-3 text-right"><span class="required">*</span>选择节点</label>
+        <div class="col-lg-8" class="col-lg-8" id="ng_nodes"></div>
+    </div>
+</form>
+</div>
+<div class="actions">
+<div class="ui approve button positive" id="do-edit-ng">确认</div>
+<div class="ui deny black button">取消</div>
+</div>
+</div>
+
+<div class="ui modal small" id="modal-privilege">
+    <div class="header">
+        <h4>权限设置</h4>
+    </div>
+    <div class="content">确定<span class='action-content'></span>
+    </div>
+    <div class="actions">
+        <div class="ui approve button positive" id="do-grant">确认</div>
+        <div class="ui deny black button">取消</div>
+    </div>
+</div>

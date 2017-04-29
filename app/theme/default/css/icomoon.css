@@ -1,0 +1,258 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?35kfav');
+	src:url('fonts/icomoon.eot?#iefix35kfav') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?35kfav') format('truetype'),
+		url('fonts/icomoon.woff?35kfav') format('woff'),
+		url('fonts/icomoon.svg?35kfav#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-ops-"], 
+[class*=" icon-ops-"], 
+[data-menu]:before {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	margin-right: 10px;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ops-account:before {
+	content: "\e610";
+}
+.icon-ops-email:before {
+	content: "\e611";
+}
+.icon-ops-locate:before {
+	content: "\e612";
+}
+.icon-ops-lock:before {
+	content: "\e613";
+}
+.icon-ops-my:before {
+	content: "\e614";
+}
+.icon-ops-password:before {
+	content: "\e615";
+}
+.icon-ops-quit:before {
+	content: "\e616";
+}
+.icon-ops-telphone:before {
+	content: "\e617";
+}
+.icon-ops-back {
+	margin-right: 5px;
+}
+.icon-ops-back:before {
+	content: "\e600";
+	font-size: 16px;
+	position: relative;
+	top: 2px;
+}
+a:hover .icon-ops-back:before {
+	content: "\e600";
+	display: none;
+}
+.icon-ops-back-hover .path1:before, 
+a:hover .icon-ops-back .path1:before {
+	content: "\e601";
+	font-size: 16px;
+	color: inherit;
+	position: relative;
+	top: 2px;
+}
+
+.icon-ops-back-hover .path2:before,
+a:hover .icon-ops-back .path2:before {
+	content: "\e602";
+	margin-left: -1em;
+	font-size: 16px;
+	color: #fff;
+	position: relative;
+	top: 2px;
+}
+.icon-ops-edit:before {
+	content: "\e620";
+}
+.icon-ops-add:before {
+	content: "\e603";
+}
+.icon-ops-checked:before {
+	content: "\e604";
+}
+.icon-ops-unchecked:before {
+	content: "\e60f";
+}
+.icon-ops-setting:before {
+	content: "\e60e";
+}
+.icon-ops-close:before {
+	content: "\e605";
+}
+.icon-ops-platform, 
+[data-menu*='manage'] {  
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 16px;
+    margin-right: 5px;
+}
+
+.icon-ops-platform .path1:before, 
+[data-menu*='manage'] .path1:before {  
+	content: "\e60c";
+    color: inherit;
+}
+.icon-ops-platform .path2:before,
+[data-menu*='manage'] .path2:before {
+	content: "\e60d";
+    color: inherit;
+    margin-left: -1em;
+}
+.icon-ops-platform .path3:before,
+[data-menu*='manage'] .path3:before {
+	content: "\e618";
+    color: inherit;
+    margin-left: -1em;
+}
+.icon-ops-platform .path4:before,
+[data-menu*='manage'] .path4:before {
+	content: "\e619";
+    color: inherit;
+    margin-left: -1em;
+}
+.icon-ops-platform .path5:before,
+[data-menu*='manage'] .path5:before {
+	content: "\e61a";
+    color: inherit;
+    margin-left: -1em;
+}
+.icon-ops-platform .path6:before,
+[data-menu*='manage'] .path6:before {
+	content: "\e61b";
+    color: inherit;
+    margin-left: -1em;
+}
+.icon-ops-platform-hover .path1:before,
+.active [data-menu*='manage'] .path1:before,
+[data-menu*='manage']:hover .path1:before {
+	content: "\e61c";
+	color: inherit;
+}
+.icon-ops-platform-hover .path2:before,
+.active [data-menu*='manage'] .path2:before,
+[data-toggle="collapse"]:hover [data-menu*='manage'] .path2:before  {
+	content: "\e61d";
+	margin-left: -1em;
+	color: inherit;
+}
+.icon-ops-platform-hover .path2 ~ [class*="path"],
+.active [data-menu*='manage'] .path2 ~ [class*="path"],
+[data-toggle="collapse"]:hover [data-menu*='manage'] .path2 ~ [class*="path"] {
+	display: none;
+}
+.icon-ops-paper-plane:before,
+[data-menu='approval']:before {
+	content: "\e05c";
+}
+
+.icon-ops-paper-plane:before,
+.active [data-menu='approval']:before,
+[data-menu='approval']:hover:before {
+	content: "\e05b";
+}
+.icon-ops-paper-plane:before,
+[data-menu='request']:before {
+	content: "\f1d8";
+}
+
+.icon-ops-paper-plane:before,
+.active [data-menu='request']:before,
+[data-menu='request']:hover:before {
+	content: "\f1d9";
+}
+.icon-ops-app:before,
+[data-menu='app']:before {
+	content: "\e608";
+}
+
+.icon-ops-app-hover:before,
+.icon-ops-app:hover:before,
+.active [data-menu='app']:before,
+[data-menu='app']:hover:before {
+	content: "\e609";
+}
+
+.icon-ops-resource:before,
+[data-menu='resource']:before {
+	content: "\e61e";
+}
+
+.icon-ops-resource-hover:before,
+.icon-ops-resource:hover:before,
+.active [data-menu='resource']:before,
+[data-menu='resource']:hover:before {
+	content: "\e61f";
+}
+
+.icon-ops-resource:before,
+[data-menu='dashboard']:before {
+	content: "\e61e";
+}
+
+.active [data-menu='resource']:before,
+[data-menu='dashboard']:hover:before {
+	content: "\e61f";
+}
+
+.icon-ops-monitor:before,
+[data-menu='monitor']:before {
+	content: "\e60a";
+}
+
+.icon-ops-monitor-hover:before,
+.icon-ops-monitor:hover:before,
+.active [data-menu='monitor']:before,
+[data-menu='monitor']:hover:before {
+	content: "\e60b";
+}
+
+.icon-ops-account:before,
+[data-menu='account']:before {
+	content: "\e614";
+}
+
+.icon-ops-account-hover:before,
+.icon-ops-account:hover:before,
+.active [data-menu='account']:before,
+[data-menu='account']:hover:before {
+	content: "\e610";
+}
+
+.icon-ops-image:before,
+[data-menu='image']:before {
+	content: "\e907";
+}
+
+.icon-ops-image-hover:before,
+.icon-ops-image:hover:before,
+.active [data-menu='image']:before,
+[data-menu='image']:hover:before {
+	content: "\e906";
+}

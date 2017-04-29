@@ -1,0 +1,152 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li role="presentation"><a href="#!/app/caas_status"><span>容器信息</span></a></li>
+            <!-- <li role="presentation" ><a href="#!/app/caas_hosts"><span>主机信息</span></a></li> -->
+            <li role="presentation" class="active"><a href="javascript:void(0);"><span>镜像列表</span></a></li>
+        </ul>
+        <div class="table-responsive" style='overflow-x: visible;'>
+            <div class='col-lg-5 btn-env-group'>
+                <a class='btn btn-default add-container'>
+                    <span class="glyphicon glyphicon-plus-sign"></span><p>新建实例</p>
+                </a>
+                <a class='btn btn-default repo disabled'>
+                    <span class="glyphicon glyphicon-th-large"></span><p>常用镜像</p>
+                </a>
+                <a class='btn btn-default all-repo'>
+                    <span class="glyphicon glyphicon-th"></span><p>全部镜像</p>
+                </a>
+            </div>
+            <div class='btn-env-group pull-right'>
+                <a class="btn btn-default dockerhub-settings disabled">
+                    <span class='glyphicon glyphicon-cog'></span><p>DockerHub设置</p>
+                </a>
+            </div>
+            <table class="table table-hover table-striped">
+                <colgroup id='colBox'>
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                    <th>名称</th>
+                    <th>说明</th>
+                </thead>
+                <tbody id="repo-box">
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-confirm" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="do-confirm">确定</button>
+                <button type="button" class="btn btn-default" id="back" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-new" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">新建实例</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="modal-form-new">
+                    <div class="form-group">
+                        <label class="col-lg-8" for='repo'>镜像</label>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                           <select class="form-control" name="image" id='repo'></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-8" for='repo-tag'>版本</label>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                           <select class="form-control" name="version" id='repo-tag'></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-8" for="name">实例名称</label>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input class="form-control" id="name" name="name" type="text" placeholder="请输入实例名称" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-8" for="targetPort">服务端口</label>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input class="form-control" id="targetPort" name="targetPort" type="text" placeholder="请输入服务端口" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-8" for="requests_memory">内存设置</label>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <input class="form-control" id="requests_memory" name="requests_memory" type="text" placeholder="请输入内存大小" />
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 row" style='line-height: 28px;'>
+                            x 128 MB
+                        </div>
+                    </div>
+                    <div class="panel env-settings" style="border: 1px solid #ddd;padding: 10px 5px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="font-size: 14px;">环境变量：</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 text-right">
+                                    <input class="form-control" type="text" placeholder="key" value="" name="key">
+                                </div>
+                                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                    <input class="form-control" type="text" placeholder="value" value="" name="value">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 overflow">
+                                    <table class="table table-bordered" id="envTable">
+                                    </table>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <p><button class="btn btn-info btn-xs mod" data-type="env">修改</button></p>
+                                    <p><button class="btn btn-info btn-xs add" id="ttt" data-type="env">保存</button></p>
+                                    <p><button class="btn btn-info btn-xs del" data-type="env">删除</button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label class="col-lg-8" for="script_path">启动脚本路径</label>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input class="form-control" id="script_path" name="script_path" type="text" placeholder="请输入启动脚本路径" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-8" for="data_path">数据路径</label>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <input class="form-control" id="data_path" name="data_path" type="text" placeholder="请输入数据路径" />
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="do-new">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

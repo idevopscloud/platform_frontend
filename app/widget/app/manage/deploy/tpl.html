@@ -1,0 +1,136 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="cbutton cbutton--effect-ivana"><a href="#!/app/status"><span>状态</span></a></li>
+            <li role="presentation" class="active"><a href="javascript:void(0);"><span>部署</span></a></li>
+            <li role="presentation" class="cbutton cbutton--effect-ivana"><a href="#!/app/build"><span>部署历史</span></a></li>
+            <!-- <li role="presentation" class="disabled"><a href="javascript:void(0);"><span>监控</span></a></li>
+            <li role="presentation" class="disabled"><a href="javascript:void(0);"><span>事件</span></a></li>
+            <li role="presentation" class="disabled"><a href="javascript:void(0);"><span>策略</span></a></li>
+            <li role="presentation" class="disabled"><a href="javascript:void(0);"><span>应用日志</span></a></li> -->
+        </ul>
+        <div class="table-responsive" id="deploy-box" style='overflow-x: visible;'>  
+            <div class='col-lg-12 btn-deploy-group row'>
+                <a class='btn btn-default btn-navy btn-fill-horz add-componet'>
+                    <span class="glyphicon glyphicon-plus-sign"></span><p>添加组件</p>
+                </a>
+                <a class='btn btn-default btn-navy btn-fill-horz sync-componet'>
+                    <span class="glyphicon glyphicon-retweet"></span><p>同步组件</p>
+                </a>
+                <a class='btn btn-default btn-navy btn-fill-horz btn-deploy disabled'>
+                    <span class="glyphicon glyphicon-cloud-upload"></span><p>部署</p>
+                </a>
+            </div>
+            <table class="table table-bordered table-hover">
+                <colgroup>
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="5%">
+                    <col width="8%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="8%">
+                </colgroup>
+                <thead>
+                    <th>名称</th>
+                    <th>版本号</th>
+                    <th>副本数</th>
+                    <th>内存限制</th>
+                    <th>组件依赖</th>
+                    <th>访问地址</th>
+                    <th>构建<!-- <span class="glyphicon glyphicon-refresh reload-image hide"></span> --></th>
+                    <th>镜像</th>
+                    <th>组件操作</th>
+                </thead>
+                <tbody id="component-box">
+                   
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer btn-env-group hide">
+        <a class='btn btn-default disabled'>
+            <span class="glyphicon glyphicon-export"></span><p>导出实例</p>
+        </a>
+        <a class='btn btn-default disabled dev-test'>
+            <span class="glyphicon glyphicon-remove-circle"></span><p>清除实例</p>
+        </a>
+        <a class='btn btn-default disabled'>
+            <span class="glyphicon glyphicon-duplicate"></span><p>克隆实例</p>
+        </a>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-console" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">构建日志</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="build-log" readonly>loading...<br /></div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-docker-file" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">DockerFile</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body form-horizontal">
+                <textarea class="docker-file" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary cbutton cbutton--effect-ivana" id="do-save-as">导出</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deploy-modal-confirm" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body form-horizontal">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="do-save">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="delete-modal-confirm" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body form-horizontal">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="do-com-delete">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

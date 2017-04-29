@@ -1,0 +1,63 @@
+.success {
+    background: rgba(89, 199, 62, 0.39);
+}
+
+.in_progress {
+    background-color:rgba(253, 216, 163, 0.69);
+}
+
+.failure {
+    background: rgba(255, 20, 20, 0.39);
+}
+
+.pending, .aborted {
+    background: rgba(183, 182, 179, 0.39);
+}
+
+.primary-section {
+	padding-bottom: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e6e9ed;
+}
+.console-log {
+	background: #566569;
+    color: #e2e3f1;
+    border: none;
+    overflow-y: scroll;
+    overflow-x: visible;
+    max-height: 600px;
+    resize: none;
+    width: 100%;
+    max-height: 600px; 
+    padding: 20px 10px;
+}
+.panel .loading {
+	position: absolute;
+	z-index: 1049;
+}
+
+.glyphicon-refresh, .glyphicon-chevron-down, .glyphicon-chevron-up {
+	cursor: pointer;
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg); 
+    -o-transform:rotate(180deg);
+}
+
+.modal-dialog {
+    margin: 5% auto;
+}
+
+#modal-docker-file .modal-dialog, #modal-console .modal-dialog { 
+    width: 800px;
+}
+
+#modal-docker-file .modal-content, #modal-console .modal-content {
+    width: 700px;
+}
+.docker-file {
+    background-color: #FFF;
+    resize: none;
+    overflow: hidden;
+    border: 1px dashed #ddd;
+    min-width: 650px;
+}

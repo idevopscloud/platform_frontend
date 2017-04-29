@@ -1,0 +1,114 @@
+<div class="ui top attached tabular menu">
+    <a class="item active" for="system-service">
+        系统服务
+    </a>
+</div>
+<div class="ui bottom attached tab segment active">
+    <table class="ui celled structured table" id="system-service-box">
+        <thead>
+            <tr>
+                <th>服务</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div class="ui top attached tabular menu tab-cluster"></div>
+<div class="ui bottom attached tab segment tab-monitor">
+    <div class="panel">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <div class="ui statistics pos-rel">
+                <div class="statistic col-lg-2">
+                    <div class="value count node-count">
+                        0
+                    </div>
+                    <div class="label">
+                        节点
+                    </div>
+                </div>
+                <div class="statistic col-lg-2">
+                    <div class="value count container-count">
+                        0
+                    </div>
+                    <div class="label">
+                        容器
+                    </div>
+                </div>
+                <div class="statistic col-lg-2">
+                    <div class="value count ng-count">
+                        0
+                    </div>
+                    <div class="label">
+                        环境
+                    </div>
+                </div>
+                <div class="statistic col-lg-2">
+                    <div class="value count mem-count">
+                        0
+                    </div>
+                    <div class="label">
+                        内存
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="ui top secondary pointing menu">
+            <div class="active item">
+                基础监控
+            </div>
+        </div>
+        <div class="ui bottom attached active tab segment">
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Master/Node</th>
+                        <th>CPU使用率</th>
+                        <th>CPU负载</th>
+                        <th>内存</th>
+                        <th>磁盘</th>
+                    </tr>
+                </thead>
+                <tbody id="basic-monitor-box">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="ui top secondary pointing menu">
+            <div class="item active" for="master-service">
+                Master服务
+            </div>
+            <div class="item" for="node-service">
+                Node服务
+            </div>
+        </div>
+        <div class="ui bottom attached tab segment active" id="master-service">
+            <table class="ui celled structured table" id="master-service-box">
+                <thead>
+                    <tr>
+                        <th>服务</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui bottom attached tab segment" id="node-service">
+            <table class="ui celled structured table" id="node-service-box">
+                <thead>
+                    <tr>
+                        <th>节点</th>
+                        <th>服务</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

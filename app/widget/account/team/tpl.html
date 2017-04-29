@@ -1,0 +1,124 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>欢迎来到团队管理</h2>
+    </div>
+    <div class="panel-body">
+        <ul class="nav nav-tabs nav-settings">
+            <li role="presentation" data-section='company' class="active cbutton cbutton--effect-ivana"><a href="javascript:void(0);"><span>团队信息</span></a></li>
+            <!-- <li role="presentation" data-section='user'><a class='cbutton cbutton--effect-ivana' href="javascript:void(0);"><span>用户信息</span></a></li> -->
+        </ul>
+        <section id='sec_user' style='display:none;'>
+            <table class="table table-bordered table-hover table-responsive readonly">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                </colgroup>
+                <thead>
+                    <th>姓名</th>
+                    <th>登录名</th>
+                    <th>团队</th>
+                </thead>
+                <tbody id="user-box"></tbody>
+                <tfoot><tr><td colspan=4><div id='page_user'></div></td></tr></tfoot>
+            </table>
+        </section>
+        <section id='sec_company'>
+            <table class="table table-bordered table-hover table-responsive">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                    <th>名称</th>
+                    <th>限额</th>
+                    <th>已用</th>
+                    <th>责任人</th>
+                    <th>操作</th>
+                </thead>
+                <tbody id="company-box"></tbody>
+                <tfoot><tr><td colspan=7><div id='page_company'></div></td></tr></tfoot>
+            </table>
+        </section>
+    </div>
+    <div class='panel-footer btn-glyphicon-group'>
+        <a class='btn btn-default btn-navy btn-fill-horz add-company'>
+            <span class="glyphicon glyphicon-plus-sign"></span><p>新增团队</p>
+        </a>
+    </div>
+</div>
+
+<div class="ui modal" id="company-modal-new">
+    <div class="header">
+        <h4 class="modal-title">团队信息</h4>
+    </div>
+    <div class="content modal-body">
+        <form class="form-horizontal" id="company-form-new" autocomplete="off">
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>名称</label>
+                <div class="col-lg-8">
+                    <input id="name" name="name" type="text" class="form-control" placeholder="请输入团队名称" />
+                </div>
+                <label class="col-lg-3" for="name"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>资源配额</label>
+                <div class="col-lg-5">
+                    <input id="mem_limit" name="mem_limit" type="number" value="10" class="form-control">
+                </div>
+                <span class="col-lg-3" style="line-height: 30px;"> x 128 MB</span>
+                <label class="col-lg-3" for="mem_limit"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>责任人</label>
+                <div class="col-lg-8">
+                    <input id="contact_user_nickname" name="contact_user_nickname" type="text" class="form-control" placeholder="请输入责任人姓名" />
+                </div>
+                <label class="col-lg-3" for="contact_user_nickname"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>登录名</label>
+                <div class="col-lg-8">
+                    <input id="contact_user_name" name="contact_user_name" type="text" class="form-control" placeholder="请输入登录名" />
+                </div>
+                <label class="col-lg-3" for="contact_user_name"></label>
+            </div>
+            <div class="form-group reset-pwd">重置密码？</div>
+            <input style="display:none" aria-hidden="true">
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>登录密码</label>
+                <div class="col-lg-8">
+                    <input id="contact_user_password" name="contact_user_password" type="password" class="form-control" placeholder="请输入登录密码" />
+                </div>
+                <label class="col-lg-3" for="contact_user_password"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>密码确认</label>
+                <div class="col-lg-8">
+                    <input id="password_again" name="password_again" type="password" class="form-control" />
+                </div>
+                <label class="col-lg-3" for="password_again"></label>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <button type="button" class="ui approval button" id="do-new">保存</button>
+        <button type="button" class="ui button deny black" data-dismiss="modal">取消</button>
+    </div>
+</div>
+
+ <div class="ui modal" id="modal-confirm">
+    <div class="header">
+        <h4 class="modal-title">请确认</h4>
+    </div>
+    <div class="content modal-body">
+        
+    </div>
+    <div class="actions">
+        <button type="button" class="ui approval button" id="do-action">确定</button>
+        <button type="button" class="ui button deny black" id="back" data-dismiss="modal">取消</button>
+    </div>
+</div>

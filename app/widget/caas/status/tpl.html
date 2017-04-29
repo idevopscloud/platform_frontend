@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="javascript:void(0);#"><span>容器信息</span></a></li>
+            <!-- <li role="presentation"><a href="#!/app/caas_hosts"><span>主机信息</span></a></li> -->
+            <li role="presentation" class=""><a href="#!/app/caas_images"><span>镜像列表</span></a></li>
+        </ul>
+        <div class="table-responsive" style='overflow-x: visible;'>
+            <div class="btn-env-group ">
+                <!-- <a class="btn btn-default instance-add">
+                    <span class="glyphicon glyphicon-plus-sign"></span><p>新增实例</p>
+                </a> -->
+                <a class="btn btn-default stack-refresh">
+                    <span class="glyphicon glyphicon-refresh"></span><p>刷新状态</p>
+                </a>
+                <a class="pull-right btn btn-default dockerhub-settings disabled">
+                    <span class='glyphicon glyphicon-cog'></span><p>DockerHub设置</p>
+                </a>
+            </div>
+            <table class="table table-hover table-striped">
+                <colgroup id='colBox'>
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                    <th>容器名称</th>
+                    <th>存活时间</th>
+                    <th>CPU</th>
+                    <th>MEM</th>
+                    <th>服务状态</th>
+                    <th>访问地址</th>
+                    <th>操作</th>
+                </thead>
+                <tbody id="container-box">
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-confirm" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="do-confirm">确定</button>
+                <button type="button" class="btn btn-default" id="back" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+

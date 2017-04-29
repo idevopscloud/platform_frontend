@@ -1,0 +1,227 @@
+input[type=number] {
+    padding-left: 4px;
+}
+.com-container {
+	padding: 15px;
+}
+
+fieldset {
+	padding: .35em .625em .75em;
+    margin: 0 2px;
+    border: 1px solid silver;
+    border-radius: 4px;
+    position: relative;
+}
+
+legend {
+	font-size: 14px;
+	width: inherit;
+	border-bottom: none;
+}
+
+.line {
+	border-top:1px solid #DDD;
+}
+
+.settings {}
+
+.mem-settings {}
+
+.available-settings fieldset {
+	height: 138px;
+}
+
+.available-settins .form-group {
+	margin-top: 15px;
+}
+
+.available-settings input,
+.mem-settings input {
+	width: 60px;
+}
+.depend-settings,.monitor-settings,.script-settings,.log-settings {
+    margin-top: 150px;
+}
+
+.group {
+    background: yellow;
+    width: 200px;
+    height: 500px;
+}
+.group .subgroup {
+    background: orange;
+    width: 150px;
+    height: 200px;
+}
+.fixed {
+    position: fixed;
+}
+
+.bs-docs-sidebar {
+    border-radius: 0px;
+    background-color: rgba(179, 137, 137, 0);
+}
+
+.bs-docs-sidebar li.active {
+    box-shadow: 9px 4px 10px #3B494C;
+}
+
+.service-bind img {
+	border-radius: 50%;
+}
+
+.script-item {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.script-item img:hover {
+    background-color: rgb(186, 191, 192);
+}
+
+.script-bind span.glyphicon-ok {
+	top: initial;
+    left: 100px;
+    bottom: 1px;
+    position: absolute;
+    font-size: 24px;
+    color: #1F3940;
+}
+
+.script-bind span.glyphicon-trash {
+    top: initial;
+    right: 100px;
+    bottom: 2px;
+    position: absolute;
+    font-size: 14px;
+    color: #1F3940;
+}
+
+.script-bind img {
+	width: 100px;
+    border: 1px solid #ddd;
+    padding: 7px;
+}
+
+.glyphicon-plus-sign {
+	top: 0;
+	font-size: 130px;
+}
+
+ul.nav {
+    background-color: transparent;
+    border-left: 1px solid #8A5252;
+}
+
+ul.nav li {
+    box-shadow: 3px 3px 2px #8A5252;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: #3B494C;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.component-btn-group {
+    margin-top: 100px;
+    background-color: transparent;
+}
+
+.component-btn-group .btn {
+    /*padding: 10px 20px;*/
+    box-shadow: 9px 4px 10px #3B494C;
+}
+
+.component-btn-group .do-save{
+    background-color: #AF8D8E;
+    border-color: #AF8D8E;
+ }
+
+ .component-btn-group .do-cancel{
+    background-color: #3B494C;
+    border-color: #3B494C;
+ }
+
+ label span.error { 
+    color: rgba(255, 0, 0, 0.71); 
+    padding-left: 5px;
+}
+
+.depend-item span.glyphicon-trash {
+    cursor: pointer;
+    top: initial;
+    position: absolute;
+    right: 25px;
+    bottom: 20px;
+}
+
+.volume-item span.glyphicon-trash {
+    cursor: pointer;
+    bottom: 0px;
+    position: absolute;
+    right: 60px;
+    top: initial;
+}
+
+.popover{
+    width: 350px; 
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

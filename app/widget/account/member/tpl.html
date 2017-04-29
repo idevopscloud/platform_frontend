@@ -1,0 +1,103 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>欢迎来到团队成员管理</h2>
+    </div>
+    <div class="panel-body">
+        <ul class="nav nav-tabs nav-settings">
+            <li role="presentation" data-section='user' class="active"><a href="javascript:void(0);"><span>成员信息</span></a></li>
+        </ul>
+        <section id='sec_user'>
+            <table class="table table-bordered table-hover table-responsive">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                    <th>姓名</th>
+                    <th>登录名</th>                    
+                    <th>团队</th>
+                    <th>操作</th>
+                </thead>
+                <tbody id="user-box"></tbody>
+                <tfoot><tr><td colspan=7><div id='page_user'></div></td></tr></tfoot>
+            </table>
+            <!-- <div id='page_user'></div> -->
+        </section>
+    </div>
+    <div class='panel-footer btn-glyphicon-group'>
+        <a class='btn btn-default btn-navy btn-fill-horz add-user disabled'>
+            <span class="glyphicon glyphicon-plus-sign"></span><p>新增成员</p>
+        </a>
+    </div> 
+</div>
+
+<div class="ui modal small" id="user-modal-new">
+    <div class="header">
+        <h4 class="modal-title">成员信息</h4>
+    </div>
+    <div class="content">
+        <form class="form-horizontal" id="user-form-new" autocomplete="off">
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>团队</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <select class="form-control" name="company_id" id="select_companies"></select>
+                </div>
+                <label class="col-lg-3" for="select_companies"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>姓名</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input id="nickname" name="nickname" type="text" class="form-control" placeholder="请输入姓名" />
+                </div>
+                <label class="col-lg-3" for="nickname"></label>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>登录名</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input id="name" name="name" type="text" class="form-control" placeholder="请输入登录名" />
+                </div>
+                <label class="col-lg-3" for="name"></label>
+            </div>
+            <div class="form-group reset-pwd">
+                <label class="col-lg-offset-3 col-lg-8 text-right">重置密码？</label>
+            </div>
+            <input style="display:none" aria-hidden="true">
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>登录密码</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input id="password" name="password" type="password" class="form-control" placeholder="请输入登录密码" />
+                </div>
+                <label class="col-lg-3" for="password"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right"><span class="required">*</span>密码确认</label>
+                <div class="col-lg-8">
+                    <input id="password_again" name="password_again" type="password" class="form-control" placeholder="请再次确认密码" />
+                </div>
+                <label class="col-lg-3" for="password_again"></label>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <button type="button" class="ui approve button" id="do-new">保存</button>
+        <button type="button" class="ui deny black button">取消</button>
+    </div>
+</div>
+
+<div class="ui modal small" id="modal-confirm">
+           <div class="header">
+               <h4 class="modal-title">请确认</h4>
+           </div>
+           <div class="modal-body content">
+               
+           </div>
+           <div class="actions">
+               <button type="button" class="ui approve button" id="do-action">确定</button>
+               <button type="button" class="ui deny black button">取消</button>
+           </div>
+       </div>
+   </div>
+</div>

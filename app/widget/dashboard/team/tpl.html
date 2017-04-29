@@ -1,0 +1,168 @@
+<div class='panel panel-default border-animation'>
+    <div class="panel-heading">
+        <h4>总览</h4>
+        <p>汇总了您所管理的环境、节点以及团队信息</p>
+    </div>
+    <div class="col-lg-12 panel panel-body panel-dashboard">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-puzzle-piece fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge count-env">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="pull-left">环境</span>
+                        <span class="pull-right"><i class="fa"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-lg-offset-1 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-sitemap fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge count-node">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="pull-left">节点</span>
+                        <span class="pull-right"><i class="fa"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-lg-offset-1 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-server fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge count-container">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="pull-left">容器</span>
+                        <span class="pull-right"><i class="fa"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-first-order fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge count-app">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">应用</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-lg-offset-1 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-gitlab fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge count-instance">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="pull-left">实例</span>
+                        <span class="pull-right"><i class="fa"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-lg-offset-1 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-user fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge count-member">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span class="pull-left">成员</span>
+                        <span class="pull-right"><i class="fa"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class='panel panel-default border-animation'>
+    <div class="panel-heading">
+        <h4>环境信息</h4>
+        <p>这里汇聚了您所管理的环境的相关信息，其中可直观的看到目前资源使用的情况</p>
+    </div>
+    <div class="col-lg-12 panel panel-body">
+        <table class="table table-bordered table-hover col-lg-12">
+            <colgroup>
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+            </colgroup>
+            <thead>
+                <th>环境</th>
+                <th>所属集群</th>
+                <th>节点数</th>
+                <th>CPU利用率</th>
+                <th>内存利用率</th>
+                <th>应用</th>
+                <th>容器</th>
+            </thead>
+            <tbody id='env-box'></tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class='panel panel-default border-animation ac-main'>
+    <div class="panel-heading">
+        <h4>最近一周告警信息</h4>
+        <p>收集汇总了近一周内所有集群的告警信息</p>
+    </div>
+    <div class="col-lg-12 panel panel-body">
+        <div class="col-lg-12" style="height:400px;" id='chart-main'></div>
+    </div>
+</div>

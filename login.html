@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>idevopscloud</title>
+    <meta name="viewport" content="width.netice-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/ico" href="app/theme/old/images/favicon.ico" />
+    <link href="app/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="app/libs/bootstrap/css/bootstrap-checkbox.css">
+    <link rel="stylesheet" href="app/libs/bootstrap/css/bootstrap-dropdown-multilevel.css">
+    <link href="app/theme/default/css/icomoon.css" rel="stylesheet">
+    <link href="app/theme/default/css/minimal.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: -webkit-linear-gradient(to top, #49959d, #010806);
+            background-image: linear-gradient(to top, #49959d, #010806);
+        }
+
+        #content.full-page .inside-block h1 {
+            margin-bottom: 50px;
+        }
+
+        #content.full-page .inside-block {
+            margin: 20% auto;
+            overflow: hidden;
+            background: none;
+            width: 440px;
+        }
+
+        #content.full-page .inside-block form {
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, .6);
+            box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, .2)
+        }
+
+        #content.full-page .inside-block img {
+            margin: 15% 0 125px;
+        }
+
+        @media screen and (min-height: 768px){
+            #content.full-page .inside-block img {
+                margin: 120px 0 125px;
+            }
+        }
+
+        #content.full-page #form-signin {
+            position: relative;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .input-group-addon {
+            padding: 13px 15px 6px 12px;
+        }
+        .form-control {
+            line-height: 32px;
+            margin-top: 13px;
+            padding: 6px 3px;
+            min-height: 32px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        #content.full-page .inside-block form  .input-group,#content.full-page .inside-block form section.controls .checkbox {
+            margin-bottom: 10px !important;
+            width: 300px;
+            height: 40px;
+            margin: 30px auto 0px !important;
+            position: relative;
+        }
+
+        #content.full-page .inside-block form  .input-group .input-group-addon {
+            border: none !important;
+            border-radius: 0 !important;
+            background: none;
+        }
+
+        #content.full-page .inside-block form  .input-group .input-group-addon i {
+            font-size: 20px;
+            width: 20px;
+            margin-right: 0;
+            color: #c4c4c4;
+        }
+
+        #content.full-page .inside-block form  .input-group input {
+            color: #000000 !important;
+            border: none !important;
+            border-radius: 0 !important;
+            background: none !important;
+            border-bottom: 1px solid #ddd !important;
+        }
+
+        #content.full-page .inside-block form  .input-group input:focus {
+            color: #000000 !important;
+            background: none !important;
+            border-bottom: 1px solid #1A52A9 !important;
+        }
+
+        .palcehold {
+            color: #c4c4c4;
+            position: absolute;
+            top: -6px;
+            left: 49px;
+            font-size: 12px;
+            transition: top .5s ease;
+        }
+
+        div.checkbox label {
+            font-size: 12px;
+        }
+
+        div.checkbox label:before {
+            width: 14px;
+            height: 14px;
+            top: 5.5px;
+        }
+
+        div.checkbox label:after {
+            left: 0px;
+            font-size: 14px;
+            color: #5274c4!important;
+            font-weight: normal;
+        }
+
+        div.checkbox.check-transparent input[type=checkbox] + label:before {
+            border-radius: 0
+        }
+
+        label span {
+            line-height: 27.5px;
+        }
+
+        .login-msg-valid, .login-msg-valid {
+            color: #e8371b;
+            font-size: 12px;
+            position: absolute;
+            margin-top: 10px;
+            left: 115px;
+        }
+        .login-btn {
+            font-size: 14px;
+            width: 135px;
+            height: 40px;
+        }
+        .copyright p {
+            font-size: 12px;
+            color: #fff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .copyright p:nth-child(1) {
+            margin-top: 30px;
+        }
+        .copyright p:nth-child(2) {
+            opacity: .5;
+        }
+    </style>
+  </head>
+  <body class="">
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+      <!-- Make page fluid -->
+      <div class="row">
+        <!-- Page content -->
+        <div id="content" class="col-md-12 full-page login">
+          <div class="inside-block">
+            <form id="form-signin" method="POST" class="form-signin" >
+              <section>
+                <div class="input-group">
+                  <div class="palcehold animated">登录名</div>
+                  <div class="input-group-addon"><i class="icon-ops icon-ops-account"></i></div>
+                  <input type="text" class="form-control" id="username" name="name" placeholder="" >
+                </div>
+                <div class="input-group">
+                  <div class="palcehold">密码</div>
+                  <div class="input-group-addon"><i class="icon-ops icon-ops-password"></i></div>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="">
+                </div>
+                <div class="login-msg-valid" style="display: none;">
+                    <i class="fa fa-exclamation-circle"></i> 您输入的用户名或密码不正确
+                </div>
+              </section>
+              <section class="controls">
+                <div class="checkbox check-transparent input-group" style='margin-left:45px !important;margin-top:40px !important;'>
+                    <input type="checkbox" value="1" name="remember" id="remember">
+                    <label style='color: #999;margin-left: 30px;border-radius:none !important;' for="remember">
+                        <span>记住账号</span>
+                    </label>
+                    <button class="btn btn-primary login-btn" style='float: right;width: 135px;margin-top: -5px;'>登 录</button>
+                </div>
+              </section>
+            </form>
+            <div class="copyright">
+                <p>Copyright © idevopscloud. All rights reserved.</p>
+            </div>
+        </div>
+        <!-- /Page content -->
+      </div>
+    </div>
+    <!-- Wrap all page content end -->
+    <script src="app/libs/jquery.min.js"></script>
+    <script src="app/script/directives/validate.js"></script>
+    <script type="text/javascript">
+        var API_HOST = 'http://192.168.99.101:8080/';
+        var reUserName = localStorage.getItem('username');
+        if (reUserName != '') {
+            $('#username').val(reUserName);
+            $('#remember').next().trigger('click');
+        }
+
+        function getCookie(c_name) {
+            var cName = localStorage.getItem(c_name);
+            return cName;
+        }
+
+        function setCookie(c_name, value, expiredays) {
+            localStorage.setItem(c_name, value);
+        }
+
+        function reclick(btnn) {
+            $(btnn).attr("disabled", true);
+            $(btnn).html("登录中");
+        }
+
+        $(function() {
+            if (getCookie('photo')) {
+                $('.user-avastar > img').attr('src', getCookie('photo'));
+            } else {
+                $('.user-avastar > img').attr('src', 'app/theme/default/images/head/login.png');
+            }
+
+            $('#form-signin input[type!=checkbox]').on('focus',
+            function() {
+                $(this).siblings(".palcehold").css({
+                    'top': '-6px'
+                });
+            }).on('blur',
+            function() {
+                if ($(this).val() === "") $(this).siblings(".palcehold").css({
+                    'top': '20px'
+                });
+            });
+
+            $('#form-signin').on('submit',
+            function() {
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                var param = $(this).serialize();
+
+                $('.login-msg-valid').hide();
+
+                if (username.length == 0) {
+                    $('.login-msg-valid').show();
+                    return false;
+                }
+
+                if (password.length == 0) {
+                    $('.login-msg-valid').show();
+                    return false;
+                }
+
+                $('.login-btn').attr('disabled', true);
+
+                $.ajax({
+                    url: API_HOST + 'signin',
+                    type: 'post',
+                    dataType: 'json',
+                    data: param,
+                    beforeSend: function() {
+                        reclick('.login-btn');
+                    },
+                    success: function(result) {
+
+                        if (result.flag == 'error' || result.flag == 'fail') {
+                            $('.login-btn').removeAttr('disabled');
+                            $('.login-btn').html('登录');
+                            $('.login-msg-valid').show();
+                        } else if (result.flag == 'success') {
+                            if ($('#remember').prop('checked')) {
+                                localStorage.setItem('username', result.data.username);
+                            } else {
+                                localStorage.setItem('username', '');
+                            }
+
+                            localStorage.setItem('token', result.data.token);
+                            localStorage.setItem('uid', result.data.uid);
+                            localStorage.setItem('nickname', result.data.nickname);
+                            localStorage.setItem('photo', result.data.photo);
+                            window.location.href = result.data.redirect;
+                        }
+                    }
+                })
+
+                return false;
+            })
+        })
+    </script>
+  </body>
+</html>

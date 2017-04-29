@@ -1,0 +1,167 @@
+<link href="app/libs/json.human/json.human.css" rel="stylesheet"/>
+<div class="col-lg-12 panel panel-default">
+    <div class="panel-heading row">
+        <h2>欢迎来到镜像管理</h2>
+        <p>这里是镜像的仓库，存储团队成员构建的全部OS+Lib镜像，该镜像包含组件源代码运行所依赖的操作系统和第三方库环境，将在构建组件时作为基础镜像被使用。</p>
+    </div>
+    <div class="panel-body">
+        <!-- <ul class="nav nav-tabs">
+            <li class="cbutton cbutton--effect-ivana active" role="presentation"><a href="#!/image/list"><span>我的镜像</span></a></li>
+            <li class="cbutton cbutton--effect-ivana disabled" role="presentation"><a href="javascript:void(0);"><span>IDO镜像</span></a></li>
+        </ul> -->
+        <div class="table-responsive" style='overflow-x: visible;'>
+            <div class="btn-env-group col-lg-12 row">
+                <a class="btn btn-default btn-navy btn-fill-horz build-image">
+                    <span class='icon-ops-setting' style='margin-right: 0px;'></span><p>构建镜像</p>
+                </a>
+            </div>
+            <div class="col-lg-12 col-sm-12 panel panel-default post-panel">
+                <div class="row panel-heading chevron-down">
+                    <h4 class="pull-left">构建</h4>
+                    <div class='col-lg-1 pull-right text-right'>
+                        <span class="glyphicon glyphicon-refresh post-refresh"></span>
+                        <!-- <span class="col-lg-offset-1 glyphicon glyphicon-chevron-up chevron-down"></span> -->
+                    </div>
+                </div>
+                <div class="col-lg-12 panel-body">
+                    <table class="table table-hover table-bordered col-lg-5">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="3%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                        </colgroup>
+                        <thead>
+                            <th>OS+Lib镜像</th>
+                            <th>STATUS</th>
+                            <th>OS镜像</th>
+                            <th>用户</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody id="post-box"></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-12 panel panel-default image-panel">
+                <div class="row panel-heading chevron-down">
+                    <h4 class="pull-left">镜像</h4>
+                    <div class='col-lg-1 pull-right text-right'>
+                        <span class="glyphicon glyphicon-refresh image-refresh"></span>
+                        <!-- <span class="col-lg-offset-1 glyphicon glyphicon-chevron-up chevron-down"></span> -->
+                    </div>
+                </div>
+                <div class="col-lg-12 panel-body">
+                    <table class="table table-hover table-bordered col-lg-5">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                        </colgroup>
+                        <thead>
+                            <th>OS+Lib镜像</th>
+                            <th>版本</th>
+                            <th>用户</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody id="image-box"></tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui modal small" id="modal-console">
+    <div class="header">
+        <h4>构建日志</h4>
+    </div>
+    <div class="content">
+        <div class="console-log" readonly style="height: 500px;">loading...<br /></div>
+    </div>
+    <div class="actions">
+        <button type="button" class="ui button deny black">关闭</button>
+    </div>
+</div>
+
+<div class="ui modal small" id="modal-docker-file">
+    <div class="header">
+        <h4>DockerFile</h4>
+    </div>
+    <div class="modal-body content">
+        <textarea class="docker-file" readonly></textarea>
+    </div>
+    <div class="actions">
+        <button type="button" class="ui approval button" id="do-save-as">导出</button>
+        <button type="button" class="ui button deny black">关闭</button>
+    </div>
+</div>
+
+<div class="ui modal small" id="modal-setting">
+    <div class="header">
+        <h4 class="modal-title">构建OS+Lib镜像</h4> 
+    </div>
+    <div class="modal-body content">
+        <form class="form-horizontal" id="modal-form-new">
+            <!-- <div class="form-group">
+                <label class="col-lg-3 text-right" for="cluster">集群</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <select class="form-control" name="cluster" id="cluster"></select>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label class="col-lg-3 text-right" for="select_base_image">操作系统</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <select class="form-control" name="base_image" id="select_base_image"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right" for="select_base_image_tag">版本</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <select class="form-control" name="base_image_tag" id="select_base_image_tag"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right" for="image_name">镜像名称</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input type='text' class="form-control" name="image_name" id="image_name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right" for="image_tag">镜像TAG</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <input type='text' class="form-control" name="image_tag" id="image_tag" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-3 text-right" for="commands">执行命令</label>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <textarea class="form-control" name="commands" id="commands"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="actions">
+        <button type="button" class="ui approval button" id="do-post">构建</button>
+        <button type="button" class="ui deny button black" data-dismiss="modal">取消</button>
+    </div>
+</div>
+
+<div class="ui modal small" id="modal-push">
+    <div class="header">
+        <h4>推送镜像</h4>
+    </div>
+    <div class="modal-body content">
+        <button type="button" class="ui button green">china-eset-1</button>
+    </div>
+    <div class="actions">
+        <button type="button" class="ui button deny black">取消</button>
+    </div>
+</div>

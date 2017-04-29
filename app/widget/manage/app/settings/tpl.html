@@ -1,0 +1,103 @@
+<form id='form-app-new' role="form" action="" method="post" >
+    <div class='full-page'>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>欢迎来到应用管理</h2>
+                <p></p>
+            </div>
+            <div class="panel-body">
+                <input name='app_icon_path' type='hidden' />
+                <div class='col-lg-8 col-lg-offset-2 app-settings'>
+                    <div class="form-group col-lg-5 col-lg-offset-1 pull-right kv-avatar">
+                        <label for='app-icons'>图标</label>
+                        <input id="app-icons" name="icon" data-uploaded=false type="file" class="file-loading">
+                    </div>
+                    <div class="form-group col-lg-6 pull-left row">
+                        <label for='app-name'>名称</label>
+                        <input id='app-name' name="name" type="text" class="form-control" placeholder="请输入应用名称" minlength="2" />
+                    </div>
+                    <div class="form-group col-lg-6 pull-left row">
+                        <label for='app-decription'>描述</label>
+                        <textarea id='app-decription' style="height: 201px;" name="description" type="text" class="form-control" placeholder="请描述应用功能和用途" />
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label>团队成员</label>
+                    </div>
+                    <div class="col-lg-12 no-padding">
+                        <div class="col-lg-10 no-padding">
+                            <div class="input-group">
+                                <select class="form-control member-search" multiple="" tabindex="-1" aria-hidden="true"></select>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">角色 <span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-right" id='member-settings'>
+                                        <li><a data-role='member' href="#">开发测试</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a data-role='master' href="#">负责人</a></li>
+                                    </ul>
+                                </div><!-- /btn-group -->
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-12 -->
+
+                        <div class='col-lg-10' style='padding: 0; margin-top:5px;'>
+                            <table class='table table-bordered table-member'>
+                                <thead>
+                                    <th></th><th>姓名</th><th>角色</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class='col-lg-1' style='padding: 0; margin-top:5px;'>
+                            <button class='btn btn-sm btn-danger do-remove-member' style='height: 41px;'>移除</button>
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-12">
+                        <label>环境设置</label>
+                    </div>
+                    <div class="col-lg-10 no-padding">
+                        <div class="ui bottom attached active tab" id="ngs">
+                            <table class="ui compact celled definition table">
+                                <thead class="full-width">
+                                    <tr>
+                                        <th></th>
+                                        <th>环境名称</th>
+                                        <th>节点</th>
+                                    </tr>
+                                </thead>
+                            <tbody class="ng-box"></tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="panel-footer btn-env-group">
+                <a class='btn btn-default cbutton--effect-ivana' href='/#!/manage/app'>返回</a>
+                <!-- <button class='btn btn-default cbutton cbutton--effect-ivana do-next disabled'>下一步</a> -->
+                <button class='btn btn-default cbutton cbutton--effect-ivana do-free-new'>完成</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- <fieldset class='full-page'>
+        <div class="panel panel-default resource-settings">
+            <div class="panel-heading">
+                <h2>欢迎来到应用管理</h2>
+                <p></p>
+            </div>
+            <div class="panel-body">
+                <div class='col-lg-8 col-lg-offset-2' id='resource-box'>
+                    <h3 style='padding-left: 20px;'>资源池设置</h3>
+                    <ul class="nav nav-tabs nav-env-settings">nav here</ul>
+                </div>
+                section here
+            </div>
+            <input name='app_icon_path' type='hidden' />
+            <div class="panel-footer btn-env-group">
+                <button class='btn btn-default do-previous'>上一步</button>
+                <button class='btn btn-default do-new'>完成</button>
+            </div>
+        </div>
+    </fieldset>
+    </form> -->
+<link href="app/libs/fileinput/css/fileinput.min.css" rel="stylesheet">

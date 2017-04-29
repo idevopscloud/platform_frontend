@@ -1,0 +1,88 @@
+.btn-manage-group {
+	margin-bottom: 10px;
+}
+
+.input-app-search-group {
+	padding: 0;
+	margin-bottom: 5px;
+}
+
+.input-group .input-group-btn button {
+    height: 34px;
+    padding: 7px 20px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+form>fieldset {
+	display: none;
+}
+
+form>fieldset:first-child {
+	display: block;
+}
+
+.table>tbody>tr.active,
+.table>tbody>tr:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+fieldset label span.error { 
+	color: rgba(255, 0, 0, 0.71); 
+	padding-left: 5px;
+}
+
+.input-group .select2-selection {
+	height: 34px;
+    border-color: #CCC;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.btn-env-group .btn {
+    width: 180px;
+}
+
+section {
+	margin-top:30px;
+}
+
+fieldset.small-block {
+	padding: .35em .625em .75em;
+    margin: 0 2px;
+    border: 1px solid silver;
+    border-radius: 4px;
+}
+
+fieldset.small-block legend {
+	font-size: 14px;
+	width: inherit;
+	border-bottom: none;
+}
+
+.node-transfer {
+	height: 100%;
+    text-align: center;
+    margin: 10px 30px;
+}
+
+.kv-avatar .file-preview-frame,.kv-avatar .file-preview-frame:hover {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    cursor: pointer;
+}
+.kv-avatar .file-input {
+    display: table-cell;
+    width: 100%;
+}
+.kv-avatar .file-default-preview h6 {
+	cursor: pointer;
+}
+
+.file-drop-zone.clickable:hover {
+    border: 1px dashed #aaa;
+}

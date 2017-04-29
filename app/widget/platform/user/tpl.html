@@ -1,0 +1,96 @@
+
+<div role="navigation">
+	<div class="nav nav-buttons">
+		<a class="btn btn-primary" id="user_group"><span class="icon-ops-add"></span>用户关联组</a>
+        <a class="btn btn-primary" id="user_role"><span class="icon-ops-add"></span>用户关联角色</a>
+	</div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" data-url="#!/platform/user" class="active"><a><span>用户管理</span></a></li>
+      <li role="presentation" data-url="#!/platform/group"><a><span>用户组管理</span></a></li>
+    </ul>
+</div>
+<br>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 font-14">	
+
+		<table class="table table-hover" id='process-list'>
+			<thead>
+				<th>ID</th>
+				<th>用户名</th>
+				<th>姓名</th>
+				<th>角色</th>
+				<th width="150">操作</th>
+			</thead>
+			<tbody id="tableBox">
+			</tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">总数：<span class="list-total-num"></span></td>
+                    <td id="pageBox" class="text-right" colspan="6"></td>
+                </tr>
+            </tfoot>
+		</table>
+	</div>
+</div>
+
+<div class="modal fade" id="linkModal"   role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                用户关联组
+            </div>
+            <div class="modal-body">
+            	<form class="form-horizontal" id="userModalForm">
+            		<div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">用户组</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<select multiple="multiple" id='groups' name="groups[]" placeholder="请选择用户组"></select>
+	                	</div>
+	                </div>
+	                <div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">用户</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<select multiple="multiple" id='users' name="users[]" placeholder="请选择用户"></select>
+	                	</div>
+	                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn btn-default" id="backDo" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="joinGroupSetting">加入</button>
+                <button type="button" class="btn btn-primary" id="leaveGroupSetting">离开</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userRoleModal"   role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                用户角色关联
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="userRoleForm">
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">用户名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select multiple="multiple"  id='user' name="users[]" placeholder="请输入用户"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">角色名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select multiple="multiple" id='role' name="roles[]" placeholder="请输入角色"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="backToUser" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="grantUserRole">授予</button>
+                <button type="button" class="btn btn-primary" id="stripUserRole">剥夺</button>
+            </div>
+        </div>
+    </div>
+</div>

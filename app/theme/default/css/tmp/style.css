@@ -1,0 +1,170 @@
+@font-face {
+    font-family: 'icomoon';
+    src:    url('fonts/icomoon.eot?9kuea8');
+    src:    url('fonts/icomoon.eot?9kuea8#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?9kuea8') format('truetype'),
+        url('fonts/icomoon.woff?9kuea8') format('woff'),
+        url('fonts/icomoon.svg?9kuea8#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ops-cabinet3:before {
+    content: "\e900";
+}
+.icon-ops-cabinet2:before {
+    content: "\e901";
+}
+.icon-ops-locked:before {
+    content: "\e902";
+}
+.icon-ops-unlocked:before {
+    content: "\e903";
+}
+.icon-ops-box:before {
+    content: "\e904";
+}
+.icon-ops-box-o:before {
+    content: "\e905";
+}
+.icon-ops-rocket:before {
+    content: "\e908";
+}
+.icon-ops-paper-plane:before {
+    content: "\f1d8";
+}
+.icon-ops-paper-plane-o:before {
+    content: "\f1d9";
+}
+.icon-ops-edit:before {
+    content: "\e620";
+}
+.icon-ops-platform .path1:before {
+    content: "\e60c";
+    color: rgb(0, 0, 0);
+}
+.icon-ops-platform .path2:before {
+    content: "\e60d";
+    margin-left: -1em;
+    color: rgb(39, 38, 54);
+}
+.icon-ops-platform .path3:before {
+    content: "\e618";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.icon-ops-platform .path4:before {
+    content: "\e619";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.icon-ops-platform .path5:before {
+    content: "\e61a";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.icon-ops-platform .path6:before {
+    content: "\e61b";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.icon-ops-platform-hover .path1:before {
+    content: "\e61c";
+    color: rgb(39, 38, 54);
+}
+.icon-ops-platform-hover .path2:before {
+    content: "\e61d";
+    margin-left: -1em;
+    color: rgb(0, 0, 0);
+}
+.icon-ops-resource:before {
+    content: "\e61e";
+}
+.icon-ops-resource-hover:before {
+    content: "\e61f";
+}
+.icon-ops-account:before {
+    content: "\e610";
+}
+.icon-ops-email:before {
+    content: "\e611";
+}
+.icon-ops-locate:before {
+    content: "\e612";
+}
+.icon-ops-lock:before {
+    content: "\e613";
+}
+.icon-ops-my:before {
+    content: "\e614";
+}
+.icon-ops-password:before {
+    content: "\e615";
+}
+.icon-ops-quit:before {
+    content: "\e616";
+}
+.icon-ops-telphone:before {
+    content: "\e617";
+}
+.icon-back:before {
+    content: "\e600";
+}
+.icon-back-hover .path1:before {
+    content: "\e601";
+    color: rgb(2, 2, 2);
+}
+.icon-back-hover .path2:before {
+    content: "\e602";
+    margin-left: -1em;
+    color: rgb(255, 255, 255);
+}
+.icon-ops-add:before {
+    content: "\e603";
+}
+.icon-ops-checked:before {
+    content: "\e604";
+}
+.icon-ops-close:before {
+    content: "\e605";
+}
+.icon-ops-event:before {
+    content: "\e606";
+}
+.icon-ops-event-hover:before {
+    content: "\e607";
+}
+.icon-ops-manage:before {
+    content: "\e608";
+}
+.icon-ops-manage-hover:before {
+    content: "\e609";
+}
+.icon-ops-monitor:before {
+    content: "\e60a";
+}
+.icon-ops-monitor-hover:before {
+    content: "\e60b";
+}
+.icon-ops-setting:before {
+    content: "\e60e";
+}
+.icon-ops-unchecked:before {
+    content: "\e60f";
+}
+

@@ -1,0 +1,272 @@
+/*app panel*/
+.box {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    background: #3B494C;
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    color: #2c3e50;
+    box-shadow: inset 0 0 0 3px #2c3e50;
+    -webkit-transition: background 0.4s 0.5s;
+    transition: background 0.4s 0.5s;
+    color: #805B5B;
+    box-shadow: 5px 5px 5px #A7AF9A;
+
+}
+
+.box:hover {
+    background: #3B494C;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.box h3 {
+    font-family: "Ruthie", cursive;
+    font-size: 180px;
+    line-height: 370px;
+    margin: 0;
+    font-weight: 400;
+    width: 100%;
+}
+
+.box span {
+    display: block;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    padding: 5px;
+}
+
+.box h3,
+.box span {
+    -webkit-transition: color 0.4s 0.5s;
+    transition: color 0.4s 0.5s;
+}
+
+.box span {
+    display: block;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    padding: 5px;
+}
+
+.box:hover h3,
+.box:hover span {
+    color: #fff;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.box svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.box svg line {
+    fill: none;
+    -webkit-transition: all .8s ease-in-out;
+    transition: all .8s ease-in-out;
+}
+
+.box:hover svg line {
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+}
+
+.box svg line.top,
+.box svg line.bottom {
+    stroke-dasharray: 240 120;
+}
+
+.box svg line.left,
+.box svg line.right {
+    stroke-dasharray: 340 230;
+}
+
+.box .app-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Frame */
+.border-animation .box {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(59, 73, 76, 0.5);
+    color: #fff;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+}
+
+.border-animation .box:hover {
+    background: rgba(59, 73, 76, 1);
+}
+
+.border-animation .box h3,
+.border-animation .box span {
+    -webkit-transition: none;
+    transition: none;
+}
+
+.border-animation .box svg line {
+    stroke-width: 0;
+    stroke: #0BC10F; 
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.border-animation .box:hover svg line {
+    stroke-width: 10;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.border-animation .box:hover svg line.top {
+    -webkit-transform: translateX(-200px);
+    transform: translateX(-200px);
+}
+
+.border-animation .box:hover svg line.bottom {
+    -webkit-transform: translateX(200px);
+    transform: translateX(200px);
+}
+
+.border-animation .box:hover svg line.left {
+    -webkit-transform: translateY(300px);
+    transform: translateY(300px);
+}
+
+.border-animation .box:hover svg line.right {
+    -webkit-transform: translateY(-300px);
+    transform: translateY(-300x);
+}
+
+#app-box {
+    min-height: 200px;
+}
+
+.app-panel {
+ 
+}
+.app-icon {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.app-name {
+    font-size: 18px;
+}
+
+.app-status {
+    margin-top: 15px;
+}
+
+.panel-foot {
+    height: 60px;
+    margin: 0;
+    text-align: center;
+    background: #ddd;
+    width: 100%;
+}
+
+.panel.panel-body {
+    border-radius: 0;
+}
+.app-btn-group {
+    display: none;
+    border-top: 1px solid #DCC5C5;
+    padding: 0;
+    /*background-color: rgba(59, 73, 76, 0.7);*/
+    background-color: rgb(59, 73, 76);
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+}
+.app-btn-group .env {
+    padding: 0;
+}
+
+.env a.btn {
+    color: #fff;
+    border-right: 1px solid #DCC5C5;
+    border-radius: 0;
+}
+.env a.btn:hover {
+    background-color: rgba(138, 82, 82, 0.68);
+}
+
+.env-radio label {
+    display: block;
+    float: left;
+}
+
+.env-radio input {
+    height: 12px;
+}
+
+.env-select {
+    padding: 10px 15px;
+}
+
+#caas-box {
+   
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+    perspective: 1000px;
+}
+
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(180deg);
+    background: rgba(61, 70, 65, 0.7);
+    color: #FFF;
+    box-shadow: 5px 5px 5px #A7AF9A;
+}
+
+.front img {
+    width: 100%;
+    box-shadow: 5px 5px 5px #A7AF9A;
+}
+

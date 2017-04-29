@@ -1,0 +1,119 @@
+<div role="navigation">
+    <div class="nav nav-buttons">
+        <a class="btn btn-primary" id="apply"><span class="icon-ops-add"></span>新增接口</a>
+    </div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" data-url="#!/platform/menu" ><a><span>菜单管理</span></a></li>
+      <li role="presentation" data-url="#!/platform/module"><a><span>模块管理</span></a></li>
+      <li role="presentation" data-url="#!/platform/api" class="active"><a><span>接口管理</span></a></li>
+    </ul>
+</div>
+<br>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 font-14">	
+
+		<table class="table table-hover" id='process-list'>
+			<thead>
+				<th>ID</th>
+				<th>名称</th>
+				<th>链接</th>
+				<th>方法</th>
+				<th width="150">操作</th>
+			</thead>
+			<tbody id="tableBox">
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="pageBox"></div>
+
+<div class="modal fade" id="settingModal" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                分组
+            </div>
+            <div class="modal-body">
+            	<form class="form-horizontal" id="modal-form">
+            		<div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">接口名称</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<input id="name" name="name" type="text" class="form-control" placeholder="请输入名称" />
+	                	</div>
+	                </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">模块名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select type="text"   id='module_id' name="module_id" placeholder="请输入模块"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">接口链接</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <input id="link" name="link" type="text" class="form-control" placeholder="请输入链接" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">接口方法</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <input id="method" name="method" type="text" class="form-control" placeholder="请输入方法" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">Controller</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <input id="controller" name="controller" type="text" class="form-control" placeholder="请输入controller" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">Action</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <input id="action" name="action" type="text" class="form-control" placeholder="请输入action" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn btn-default" id="back" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="saveSetting">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="linkModal" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                用户关联组
+            </div>
+            <div class="modal-body">
+            	<form class="form-horizontal" id="userModalForm">
+            		<div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">操作</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<select id='doType' name="doType" placeholder="请选择要执行的操作"></select>
+	                	</div>
+	                </div>
+            		<div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">用户组</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<select multiple="multiple" id='groups' name="groups[]" placeholder="请选择用户组"></select>
+	                	</div>
+	                </div>
+	                <div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">用户</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<select multiple="multiple" id='users' name="users[]" placeholder="请选择用户"></select>
+	                	</div>
+	                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn btn-default" id="backDo" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="doSetting">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

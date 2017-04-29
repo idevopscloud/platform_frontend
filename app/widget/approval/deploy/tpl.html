@@ -1,0 +1,52 @@
+<link href="app/libs/json.human/json.human.css" rel="stylesheet"/>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>欢迎来到我的审批</h2>
+    </div>
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li class="cbutton cbutton--effect-ivana active" role="presentation"><a href="javascript:void(0);"><span>上线部署</span></a></li>
+            <li class="cbutton cbutton--effect-ivana" role="presentation"><a href="#!/approval/instance_clean"><span>停止实例</span></a></li>
+            <li class="cbutton cbutton--effect-ivana" role="presentation"><a href="#!/approval/pod_restart"><span>容器重新调度</span></a></li>
+        </ul>
+        <div class="table-responsive" style='overflow-x: visible;'> 
+            <table class="table table-bordered table-hover approval-box">
+                <colgroup>
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                    <col width="">
+                </colgroup>
+                <thead>
+                    <th>环境</th>
+                    <th>请求操作</th>
+                    <th>发起人</th>
+                    <th>发起时间</th>
+                    <th>审批</th>
+                </thead>
+                <tbody class='deploy-box'>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-deploy" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body form-horizontal">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary cbutton cbutton--effect-ivana" id="do-approval">确定</button>
+                <button type="button" class="btn btn-default cbutton cbutton--effect-ivana" id="back" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

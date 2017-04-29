@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>idevopscloud</title>
+    <meta name="viewport" content="width.netice-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="keyword" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="app/theme/v1/images/favicon.ico" />
+    <link href="app/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/libs/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <link href="app/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="app/libs/animate/animate.css" rel="stylesheet"/>
+    <link href="app/libs/select2/v4/css/select2.css" rel="stylesheet"/>
+    <link href="app/libs/select2/select2-bootstrap.css" rel="stylesheet"/>
+    <link href="app/libs/select2/select2-bootstrap-fix.css" rel="stylesheet"/>
+    <link href="app/libs/semantic/semantic.min.css" rel="stylesheet"/>
+    <link href="app/theme/v1/css/webStyle.css" rel="stylesheet">
+    <link href="app/theme/v1/css/icomoon.css" rel="stylesheet">
+    <link href="app/libs/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="app/libs/sweetalert/themes/twitter/twitter.css" rel="stylesheet">
+    <script type="text/javascript" src="app/libs/jquery.min.js"></script>
+    <script language="javascript">
+        var userToken = localStorage.getItem('token');
+        var loginQuery = window.location.hash;
+        var loginUrl = 'login.html';
+        if (loginQuery)
+            loginUrl += '?'+loginQuery;
+        if(!userToken){
+             window.location.href = loginUrl;
+        }else{
+            $.ajax({
+                url: 'http://192.168.99.101:8080/api/token?token='+localStorage.getItem('token'),
+                type: 'get',
+                dataType: 'json',
+                data: null,
+                success: function(result) {
+                    if(result.flag != 'success'){
+                         window.location.href = loginUrl;
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <header class="clearfix widget-placeholder" role="top" widget-package="index/top"></header> -->
+    <main class="clearfix" role="main">
+        <div class="widget-placeholder main-left" widget-package="index/left"></div>
+        <div class="mainBox">
+            <div id='app-head' style='display:none;'>
+                <ol class="breadcrumb">
+                    <li><a href="#!/app/list">我的应用</a></li>
+                    <li class="active app-name"></li>
+                </ol>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="form-horizontal col-lg-5">
+                            <div class="form-group">
+                                <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">环境</label>
+                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                    <select class="form-control" name="node_group" id='sel-node-group'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">实例名称</label>
+                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                    <select class="form-control env-name"  name="env-name" id='env-name'></select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="app-main" id="widgets_goes_here"></div>
+            <div class="modal fade" id="product-modal-confirm" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">请确认</h4>                              
+                            <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+                        </div>
+                        <div class="modal-body">
+                            目前无发布实例，是否创建一个？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn-clone">确定</button>
+                            <button type="button" class="btn btn-default" id="back" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="app-instance-clone-modal" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">克隆实例</h4>                              
+                            <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" id="modal-form-clone">
+                                <div class="form-group">
+                                    <label class="col-lg-8" for="clone-app-instance">From:已有实例</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control" name="clone-app-instance" id="clone-app-instance"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-8 to-instance" for="name">To:新的实例</label>
+                                    <div class="col-lg-8">
+                                        <input class="new-app-instance form-control" name='name' id='name' type="text" placeholder="请输入新的实例名称"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-env-category="product" id="do-pro-clone">确定</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="env-modal-new" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">新增实例</h4>                              
+                            <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" id="modal-form-new">
+                                <div class="form-group">
+                                    <label class="col-lg-8">环境</label>
+                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                       <select class="form-control node_group" name="node_group" id='node-group'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-8" for="name">实例名称</label>
+                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                        <input id="name" name="name" type="text" class="form-control" placeholder="请输入实例名称" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="do-new">确定</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div id="msg_placeholder"></div>
+    </main>
+    <footer class="bluebar center widget-placeholder hide" widget-package="index/footer"></footer>
+    <script type="text/javascript" src="app/script/directives/require.js"></script>
+    <script type="text/javascript" src="app/script/main.js?20160726"></script>
+
+</body>
+</html>

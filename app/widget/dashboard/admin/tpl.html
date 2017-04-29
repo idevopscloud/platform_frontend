@@ -1,0 +1,67 @@
+<div class='panel panel-default border-animation'>
+    <div class="panel-heading">
+        <h4>团队信息</h4>
+        <p>您所管理的团队，包括：团队成员，团队所有的环境资源池，以及所有的应用和容器使用情况</p>
+    </div>
+    <div class="col-lg-12 panel panel-body">
+        <table class="table table-bordered table-hover col-lg-12 table-team">
+            <colgroup>
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+            </colgroup>
+            <thead>
+                <th>团队</th>
+                <th>用户</th>
+                <th>环境</th>
+                <th>应用</th>
+                <th>容器</th>
+            </thead>
+            <tbody id='team-box'></tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class='panel panel-default border-animation'>
+    <div class="panel-heading">
+        <h4>集群信息</h4>
+        <p>这里汇聚了您所管理的集群的相关信息，其中可直观的看到目前资源使用的情况</p>
+    </div>
+    <div class="col-lg-12 panel panel-body">
+        <table class="table table-bordered table-hover col-lg-12">
+            <colgroup>
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+            </colgroup>
+            <thead>
+                <th>集群</th>
+                <th>节点数</th>
+                <th>CPU利用率</th>
+                <th>内存利用率</th>
+                <th>容器</th>
+            </thead>
+            <tbody class='cluster-box'></tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class='panel panel-default border-animation ac-main'>
+    <div class="panel-heading">
+        <h4>最近一周告警信息</h4>
+        <p>收集汇总了近一周内所有集群的告警信息</p>
+    </div>
+    <div class="col-lg-12 panel panel-body">
+        <div class="col-lg-12" style="height:400px;" id='chart-main'></div>
+    </div>
+</div>

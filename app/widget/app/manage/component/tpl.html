@@ -1,0 +1,566 @@
+<div class="panel panel-default hide">
+    <div class="panel-body">
+        <ul class="nav nav-tabs col-lg-12" role="tablist">
+            <li role="presentation" class="active"><a href="#com-container"><span>容器</span></a></li>
+            <li role="presentation"><a href="#com-config"><span>配置</span></a></li>
+            <li role="presentation"><a href="#com-dependents"><span>依赖设置</span></a></li>
+            <li role="presentation"><a href="#com-script"><span>脚本</span></a></li>
+            <!-- <li role="presentation"><a href="#com-monitor"><span>监控项</span></a></li>
+            <li role="presentation"><a href="#com-log"><span>日志</span></a></li> -->
+        </ul>
+    </div>
+</div>
+
+<nav class="col-lg-1 bs-docs-sidebar fixed no-padding" id="component-navbar">
+    <ul class="nav" role="tablist">
+        <li role="presentation" class="active"><a href="#com-container"><span>基本信息</span></a></li>
+        <li role="presentation"><a href="#com-config"><span>容器配置</span></a></li>
+        <li role="presentation"><a href="#com-service"><span>服务配置</span></a></li>
+        <li role="presentation"><a href="#com-dependents"><span>依赖设置</span></a></li>
+        <li role="presentation"><a href="#com-script"><span>脚本设置</span></a></li>
+        <!-- <li role="presentation"><a href="#com-monitor"><span>监控设置</span></a></li> -->
+        <!-- <li role="presentation"><a href="#com-log"><span>日志配置</span></a></li> -->
+    </ul>
+    <div class="col-lg-12 no-padding component-btn-group">
+        <button class='btn btn-primary col-lg-5 cbutton cbutton--effect-ivana do-save'>保存</button>
+        <button class='btn btn-warning col-lg-5 cbutton cbutton--effect-ivana pull-right do-cancel'>取消</button>
+    </div>
+</nav>
+
+<form id="form-new">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>基本信息</h4>
+    </div>
+    <div class="panel-body">
+        <section class='com-container col-lg-8 col-lg-offset-1' id="com-container"><!-- container -->
+            <div class="form-group col-lg-3 row">
+                <label for='com-name'>名称</label>
+                <input id='com-name' name="container[name]" type="text" class="form-control" placeholder="请输入组件名称"/>
+            </div>
+            <div class="form-group col-lg-12 row" id="switcher">
+                <label style="vertical-align: top;">使用已有镜像？</label>
+                <label class="switch">
+                    <input id="use_base_image" name='use_base_image' type="checkbox" value=1>
+                    <div class="slider"></div>
+                </label>
+            </div>
+            <div class="col-lg-12 row image-panel" style='display:none;'>
+                <div class="form-group col-lg-8 row">
+                    <label for='com-image'>组件镜像</label>
+                    <input id='com-image' name="container[image]" type="text" class="form-control" placeholder="请输入组件镜像URL" />
+                </div>
+                <div class="form-group col-lg-3 col-lg-offset-1 row">
+                    <label for='com-tag-num'>版本号</label>
+                    <input id='com-tag-num' name="container[version]" type="text" class="form-control" placeholder="请输入版本号" />
+                </div>
+            </div>
+            <div class="col-lg-12 row build-panel">
+                <div class="form-group col-lg-3 row">
+                    <label>基础镜像(OS+Lib)</label>
+                    <select name='base_image' class="base-image"></select>
+                </div>
+                <div class='clearfix'></div>
+                <div class="form-group col-lg-7 row">
+                    <label for='git-addr'>Git地址</label>
+                    <input id='git-addr' name="git[addr]" type="text" class="form-control" placeholder="scheme://[user[:pwd]@]hostname/path.git" />
+                </div>
+                <div class="form-group col-lg-3 col-lg-offset-1 row">
+                    <label for='git-tag'>版本号</label>
+                    <input id='git-tag' name="git[tag]" type="text" class="form-control" placeholder="Tag" />
+                </div>
+                <div class='clearfix'></div>
+                <div class="form-group col-lg-5 row">
+                    <label for='build-path'>构建脚本</label>
+                    <input id='build-path' name="build_path" type="text" class="form-control" placeholder="请输入build.sh在源码中的相对路径，如bin/build.sh" />
+                </div>
+                <div class="form-group col-lg-5 col-lg-offset-1 row">
+                    <label for='start-path'>启动脚本</label>
+                    <input id='start-path' name="start_path" type="text" class="form-control" placeholder="请输入start.sh在源码中的相对路径，如bin/start.sh" />
+                </div>
+            </div>
+            <div class='clearfix'></div>
+            <p class='line'></p>
+            <div class="form-group col-lg-5 row settings mem-settings">
+                <fieldset>
+                    <legend>内存限制</legend>
+                    <div class="form-group col-lg-12 row">
+                        <label class="col-lg-5 text-right" for="memory_min">最小保证</label>
+                        <div class="col-lg-7 row">
+                            <input type='number' id="memory_min" name="container[memory_min]"  min="1" value="1"/><span> x 128 MB</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-12 row">
+                        <label class="col-lg-5 text-right" for="memory_max">最大限制</label>
+                        <div class="col-lg-7 row">
+                            <input id="memory_max" type='number' name="container[memory_max]" min="1" value="1"/><span> x 128 MB</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-5 col-lg-offset-1 no-padding settings available-settings">
+                <fieldset>
+                    <legend>高可用设置</legend>
+                    <div class="form-group col-lg-12 row">
+                        <label class="col-lg-5 text-right" for='replicas'>副本数</label>
+                        <div class="col-lg-6 row">
+                            <input id='replicas' type='number' name="container[replicas]" min="1" value="1"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group col-lg-12 no-padding settings env-settings">
+                <fieldset>
+                    <legend>环境变量设置</legend>
+                    <div class="form-group col-lg-10 row">
+                        <div class="col-lg-4 row">
+                            <input type="text" class="form-control env-key" placeholder="Key">
+                        </div>
+                        <div class="col-lg-8 row pull-right">
+                            <input type="text" class="form-control env-value" placeholder="Value">
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-10 no-padding">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <colgroup>
+                                    <col width='30%'></col>
+                                    <col width='70%'></col>
+                                </colgroup>
+                                <thead>
+                                    <th>变量</th>
+                                    <th>值</th>
+                                </tr></thead>
+                                <tbody class='env-variable-box'>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-1" style='margin-left:5px;'>
+                        <button class='btn btn-xs btn-primary env-settings-save'>保存</button>
+                        <button class='btn btn-xs btn-warning env-settings-remove' style='margin-left:0;margin-top:10px;'>移除</button>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group col-lg-12 no-padding hide">
+                <fieldset>
+                    <legend>高级设置</legend>
+                    <div class="form-group col-lg-12 row">
+                        <label class="col-lg-5 text-right">组件类型</label>
+                        <div class="col-lg-6 row">
+                            <select>
+                                <option>普通</option>
+                                <option>高级</option>
+                            </select>  
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+        </section><!-- container end -->
+    </div>
+</div>
+
+<div class="panel panel-default full-page">
+    <div class="panel-heading">
+        <h4>容器配置</h4>
+    </div>
+    <div class="panel-body">
+        <section class='com-config col-lg-8 col-lg-offset-1' id='com-config'><!-- config -->
+            <div class="form-group col-lg-12 no-padding settings env-settings hide">
+                <fieldset>
+                    <legend>主机端口映射</legend>
+                    <div class="form-group col-lg-10 row">
+                        <div class="col-lg-3 row">
+                            <input type="text" id='rc-port-container' class="form-control form-port rc-port-container" rangelength="[1,65535]" min="1" max="65535" placeholder="容器端口">
+                        </div>
+                        <div class="col-lg-3 col-lg-offset-1 row">
+                            <input type="text" id='rc-port-host' class="form-control form-port rc-port-host" rangelength="[1,65535]" min="1" max="65535" placeholder="主机端口">
+                        </div>
+                        <div class="col-lg-2 col-lg-offset-1 row">
+                            <select class="form-control rc-port-protocol">
+                                <option>TCP</option>
+                                <option>UDP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-10" style="padding: 0;">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th>容器端口</th>
+                                    <th>主机端口</th>
+                                    <th>协议</th>
+                                </tr></thead>
+                                <tbody class='rc-port-box'>
+                                     
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-1" style='margin-left:5px;'>
+                        <button class='btn btn-xs btn-primary rc-port-save'>保存</button>
+                        <button class='btn btn-xs btn-warning rc-port-remove' style='margin-left:0;margin-top:10px;'>移除</button>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-12 no-padding settings env-settings hide">
+                <fieldset>
+                    <legend>IP绑定</legend>
+                    <div class="form-group col-lg-10 row">
+                        <!-- <select class="form-control rc-node-bind" name='config[rc][nodes][]' multiple="multiple">
+                        </select> -->
+                    </div>
+                    <div class="form-group row col-lg-10" style="padding: 0;">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <tbody class='rc-node-box'>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group row col-lg-1" style='margin-left:5px;'>
+                        <button class='btn btn-xs btn-primary rc-node-bind-save'>保存</button>
+                        <button class='btn btn-xs btn-warning rc-node-bind-remove' style='margin-left:0;margin-top:10px;'>移除</button>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-12 no-padding settings env-settings hide">
+                <fieldset>
+                    <legend>服务扩展绑定</legend>
+                    <div class="form-group col-lg-9 row service-bind">
+                        <div class='col-lg-3'>
+                            <img src='app/theme/default/svg/apps/redis.svg' />
+                        </div>
+                        <div class='col-lg-3'>
+                            <img src='app/theme/default/svg/apps/mysql.svg' />
+                        </div>
+                        <div class='col-lg-3'>
+                            <img src='app/theme/default/svg/apps/postgres.svg' />
+                        </div>
+                    </div>
+                    <div class="col-lg-3 row">
+                        <a href="javascript:void(0);">
+                            <span data-toggle="tooltip" data-trigger="hover" data-placement="right" title="添加服务扩展" class="glyphicon glyphicon-plus-sign"></span>
+                        </a>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-12 no-padding settings env-settings">
+                <fieldset>
+                    <legend>加载卷</legend>
+                    <div class="form-group col-lg-9 row volume-bind">
+                       
+                    </div>
+                    <div class="col-lg-3 row">
+                        <a href="javascript:void(0);">
+                            <span data-toggle="tooltip" data-trigger="hover" data-placement="right" title="添加加载卷" class="glyphicon glyphicon-plus-sign volume-bind-add"></span></a>
+                    </div>
+                </fieldset>
+            </div>
+        </section><!-- config end -->
+    </div>
+</div>
+
+<div class="panel panel-default full-page">
+    <div class="panel-heading">
+        <h4>服务配置</h4>
+    </div>
+    <div class="panel-body">
+        <section class='com-config col-lg-8 col-lg-offset-1' id='com-service'><!-- service config -->
+            <div class="form-group col-lg-12 no-padding settings">
+                <fieldset>
+                    <legend>开放端口</legend>
+                    <div class='client-public'>
+                        <div class="col-lg-3 row">
+                            <input type="text" name="config[service][port][]" id='service-port-container' class="form-control form-port service-port-container" min="1" max="65535" placeholder="容器端口">
+                        </div>
+                        <div class="col-lg-3 col-lg-offset-1 row">
+                            <select class="form-control service-port-protocol" name="config[service][protocol]">
+                                <option>TCP</option>
+                                <option>UDP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="client-private">
+                        <div class="form-group col-lg-10 row">
+                            <div class="col-lg-3 row">
+                                <input type="text" id='service-port-container' class="form-control form-port service-port-container" rangelength="[1,65535]" min="1" max="65535" placeholder="容器端口">
+                            </div>
+                            <div class="col-lg-3 col-lg-offset-1 row">
+                                <input type="number" id="service-port-host" class="form-control form-port service-port-host" min="40000" max="42000" placeholder="服务端口">
+                            </div>
+                            <div class="col-lg-2 col-lg-offset-1 row">
+                                <select class="form-control service-port-protocol">
+                                    <option>TCP</option>
+                                    <option>UDP</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row col-lg-10" style="padding: 0;">
+                            <div class="col-lg-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <th>容器端口</th>
+                                        <th>服务端口</th>
+                                        <th>协议</th>
+                                    </tr></thead>
+                                    <tbody class='service-port-box'>
+                                         
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group row col-lg-1" style='margin-left:5px;'>
+                            <button class='btn btn-xs btn-primary service-port-save'>保存</button>
+                            <button class='btn btn-xs btn-warning service-port-remove' style='margin-left:0;margin-top:10px;'>移除</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-12 no-padding settings svc-ip-settings">
+                <fieldset>
+                    <legend>IP绑定</legend>
+                    <div class='client-public'>
+                        自动分配
+                    </div>
+                    <div class='client-private'>
+                        <div class="form-group col-lg-10 row">
+                            <select class="form-control service-node-bind" name=''>
+                            </select>
+                        </div>
+                        <div class="form-group row col-lg-10" style="padding: 0;">
+                            <div class="col-lg-12">
+                                <table class="table table-bordered">
+                                    <tbody class='service-node-box'>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group row col-lg-1" style='margin-left:5px;'>
+                            <button class='btn btn-xs btn-primary service-node-bind-save'>保存</button>
+                            <button class='btn btn-xs btn-warning service-node-bind-remove' style='margin-left:0;margin-top:10px;'>移除</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </section><!-- service end -->
+    </div>
+</div>
+
+<div class="panel panel-default full-page">
+    <div class="panel-heading">
+        <h4>依赖设置</h4>
+    </div>
+    <div class="panel-body">
+        <section class='com-dependents col-lg-8 col-lg-offset-1' id='com-dependents'><!-- dependents -->
+            <div class="form-group col-lg-12 no-padding settings depend-settings">
+                <fieldset>
+                    <legend>依赖组件</legend>
+                    <div class="form-group col-lg-9 row depend-bind">
+                    </div>
+                    <div class="col-lg-3 row">
+                        <a href="javascript:void(0);">
+                            <span data-toggle="tooltip" data-trigger="hover" data-placement="right" title="添加依赖组件" class="glyphicon glyphicon-plus-sign depend-bind-add"></span>
+                        </a>
+                    </div>
+                </fieldset>
+            </div>
+        </section><!-- dependents end -->
+    </div>
+</div>
+
+<div class="panel panel-default full-page">
+    <div class="panel-heading">
+        <h4>脚本设置</h4>
+    </div>
+    <div class="panel-body">
+        <section class='com-script col-lg-8 col-lg-offset-1' id='com-script'><!-- script -->
+            <div class="col-lg-12 form-group no-padding">
+                <fieldset>
+                    <legend>添加脚本</legend>
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-3 text-right">执行点</label>
+                        <div class="col-lg-8 row">
+                            <select class='form-control script-hook'>
+                                <option value='alive'>存活中检测</option>
+                                <option value='readiness'>准备好检测</option>
+                                <option value='poststart'>开始前执行</option>
+                                <option value='prestop'>结束前执行</option>
+                            </select>
+                        </div>  
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-3 text-right">类型</label>
+                        <div class="col-lg-8 row">
+                            <select class='form-control script-type'>
+                                <option value='exec'>Exec</option>
+                                <option value='httpget'>HttpGet</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-3 text-right">执行文件</label>
+                        <div class="col-lg-8 row">
+                            <input class='form-control script-name' placeholder="请输入执行文件名（全路径）" />
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <div class="col-lg-8 col-lg-offset-3 no-padding">
+                            <button class='btn btn-primary do-script-save'>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-6 no-padding settings script-bind">
+                <fieldset class='alive'>
+                    <legend>存活中检测</legend>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-6 no-padding settings script-bind">
+                <fieldset class='readiness'>
+                    <legend>准备好检测</legend>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-6 no-padding settings script-bind">
+                <fieldset class='poststart'>
+                    <legend>开始前执行</legend>
+                </fieldset>
+            </div>
+            <div class="form-group col-lg-6 no-padding settings script-bind">
+                <fieldset class='prestop'>
+                    <legend>结束前执行</legend>
+                </fieldset>
+            </div>
+        </section><!--  end -->
+    </div>
+</div>
+
+<div class="panel panel-default full-page hide">
+    <div class="panel-heading">
+        <h4>监控设置</h4>
+    </div>
+    <div class="panel-body">
+        <section class='com-monitor col-lg-8 col-lg-offset-1' id='com-monitor'><!-- monitor -->
+            <div class="form-group col-lg-12 no-padding settings monitor-settings">
+                <fieldset>
+                    <legend>通用监控添加</legend>
+                    <div class="form-group col-lg-12 row">
+                        <label for='com-monitor'></label>
+                        <textarea style='height: 40vh;' id='com-monitor' name="monitor" class='form-control' placeholder="请输入监控描述"></textarea>
+                    </div>
+                </fieldset>
+            </div>
+        </section><!-- monitor end -->
+    </div>
+</div> -->
+
+<div class="panel panel-default full-page hide">
+    <div class="panel-heading">
+        <h4>日志配置</h4>
+    </div>
+    <div class="panel-body">
+        <section class='com-log col-lg-8 col-lg-offset-1' id='com-log'><!-- log -->
+            <div class="form-group col-lg-12 no-padding settings log-settings">
+                <fieldset class="form-horizontal">
+                    <legend>路径设置</legend>
+                    <div class="form-group">
+                        <label class="col-lg-3 text-right">容器日志输出路径</label>
+                        <div class="col-lg-8 row">
+                            <input type='text' class="form-control" placeholder="/var/log/xxx"/>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 text-right">服务日志输出路径</label>
+                        <div class="col-lg-8 row">
+                            <input type='text' class="form-control" placeholder="/var/log/xxx"/>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 text-right">系统日志输出路径</label>
+                        <div class="col-lg-8 row">
+                            <input type='text' class="form-control" placeholder="/var/log/xxx"/>
+                        </div>  
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 text-right">Redis日志输出路径</label>
+                        <div class="col-lg-8 row">
+                            <input type='text' class="form-control" placeholder="/var/log/xxx"/>
+                        </div>  
+                    </div>
+                </fieldset>
+            </div>
+        </section><!-- log end -->
+    </div>
+</div>
+</form>
+
+
+
+<div class="modal fade" id="volume-modal-add" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">添加加载卷</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="modal-form-add">
+                    <div class="form-group">
+                        <label class="col-lg-8" for='name'>名称</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                           <input id="name" name="name" type="text" class="form-control" placeholder="请输入加载卷名称" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-8" for='host-path'>主机路径</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                           <input id="host-path" name="host_path" type="text" class="form-control" placeholder="请输入主机路径" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-8" for='mount-path'>挂载路径</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <input id="mount-path" name="mount_path" type="text" class="form-control" placeholder="请输入挂载路径" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="do-volume-save">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="depend-modal-add" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">选择依赖组件</h4>                              
+                <button type="button" class='close-block button-cancel' data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="icon-ops icon-ops-close"></span></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">组件</label>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                            <select class="depend-component" class="form-control" placeholder="请选择组件">
+                                <option value=''>选择组件</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="do-depend-save">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

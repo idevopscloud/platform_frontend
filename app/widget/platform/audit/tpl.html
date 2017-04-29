@@ -1,0 +1,57 @@
+<div id="msg_placeholder"></div>
+<div class="tile-header nav-buttons">
+    <h2>记录列表</h2>
+    <div class="row">
+        <div class="row col-sm-12" style='margin-bottom:5px;'>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
+                <input id="user_name" type="text" placeholder="用户" class="form-control ">
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
+                <input id="remote_address" type="text" placeholder="IP来源" class="form-control">
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
+                <input id="request_path" type="text" placeholder="访问地址" class="form-control">
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
+                <input id="request_action" type="text" placeholder="访问方法" class="form-control">
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
+                <input id="begin_time" type="text" placeholder="开始时间" class="form-control datepicker">
+            </div>
+            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
+                <input id="end_time" type="text" placeholder="结束时间" class="form-control datepicker">
+            </div>
+        </div>
+        <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
+            <button class="btn btn-primary" id="filter">筛选</button>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 font-14">	
+
+		<table class="table table-hover" id='process-list'>
+			<thead>
+				<th>ID</th>
+				<th>用户</th>
+				<th>Ip来源</th>
+                <th>访问地址</th>
+                <th>访问方法</th>
+                <th>访问内容</th>
+                <th>创建时间</th>
+			</thead>
+			<tbody id="tableBox">
+			</tbody>
+            <tfoot>
+                <tr><td colspan=2>
+                    总数：<span class="list-total-num" ></span>
+                </td>
+                <td colspan=5 class='text-right' id='pageBox'>
+                </td></tr>
+            </tfoot>
+		</table>
+	</div>
+</div>
+<div class="row">
+</div>

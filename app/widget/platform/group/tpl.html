@@ -1,0 +1,79 @@
+
+<div role="navigation">
+    <div class="nav nav-buttons">
+        <a class="btn btn-primary" id="apply"><span class="icon-ops-add"></span>新增分组</a>
+    </div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" data-url="#!/platform/user" ><a><span>用户管理</span></a></li>
+      <li role="presentation" data-url="#!/platform/group" class="active"><a><span>用户组管理</span></a></li>
+    </ul>
+</div>
+<br>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 font-14">	
+
+		<table class="table table-hover" id='process-list'>
+			<thead>
+				<th>ID</th>
+				<th>名称</th>
+				<th>角色</th>
+				<th>成员个数</th>
+				<th width="250">操作</th>
+			</thead>
+			<tbody id="tableBox">
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="pageBox"></div>
+
+<div class="modal fade" id="settingModal" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                分组
+            </div>
+            <div class="modal-body">
+            	<form class="form-horizontal" id="modal-form">
+            		<div class="form-group">
+	                	<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">名称</label>
+	                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+	                		<input id="name" name="name" type="text" class="form-control" placeholder="请输入名称" />
+	                	</div>
+	                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn btn-default" id="back" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="saveSetting">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userModal" role="dialog" data-backdrop="static" aria-labelledby="modalDialogLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:15px 0px 0px 15px;">
+                <h2 class="modal-title">用户组成员</h2>
+                <table class="table table-custom nomargin">
+                    <thead>
+                    <tr>
+                        <th style="width:40px;">ID</th>
+                        <th>用户名</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-body" style="padding:5px 15px;height:220px;overflow: auto;">
+                <table class="table table-custom nomargin">
+                    <tbody id="userBody"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

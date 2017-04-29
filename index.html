@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>idevopscloud</title>
+    <meta name="viewport" content="width.netice-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="keyword" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="app/theme/v1/images/favicon.ico" />
+    <link href="app/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="app/libs/animate/animate.css" rel="stylesheet"/>
+    <link href="app/libs/select2/v4/css/select2.css" rel="stylesheet"/>
+    <link href="app/libs/select2/select2-bootstrap.css" rel="stylesheet"/>
+    <link href="app/libs/select2/select2-bootstrap-fix.css" rel="stylesheet"/>
+    <link href="app/libs/semantic/semantic.min.css" rel="stylesheet"/>
+    <link href="app/theme/v1/css/webStyle.css" rel="stylesheet">
+    <link href="app/theme/v1/css/icomoon.css" rel="stylesheet">
+    <link href="app/libs/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="app/libs/sweetalert/themes/twitter/twitter.css" rel="stylesheet">
+    <script type="text/javascript" src="app/libs/jquery.min.js"></script>
+    <script language="javascript">
+        var userToken = localStorage.getItem('token');
+        var loginQuery = window.location.hash;
+        var loginUrl = 'login.html';
+        if (loginQuery)
+            loginUrl += '?'+loginQuery;
+        if(!userToken){
+             window.location.href = loginUrl;
+        }else{
+            $.ajax({
+                url: 'http://192.168.99.101:8080/api/token?token='+localStorage.getItem('token'),
+                type: 'get',
+                dataType: 'json',
+                data: null,
+                success: function(result) {
+                    if(result.flag != 'success'){
+                         window.location.href = loginUrl;
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <!-- <header class="clearfix widget-placeholder" role="top" widget-package="index/top"></header> -->
+    <main class="clearfix" role="main">
+        <div class="widget-placeholder main-left" widget-package="index/left"></div>
+        <div class="mainBox" id="widgets_goes_here"></div>
+        <div id="msg_placeholder"></div>
+    </main>
+    <!-- <footer class="bluebar center widget-placeholder" widget-package="index/footer"></footer> -->
+    <script type="text/javascript" src="app/script/directives/require.js"></script>
+    <script type="text/javascript" src="app/script/main.js?20160726"></script>
+
+</body>
+</html>

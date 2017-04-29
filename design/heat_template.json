@@ -1,0 +1,1315 @@
+{
+    "description": "Heat template to deploy kubernetes replication controllers and services to an existing host",
+    "heat_template_version": "2013-05-23",
+    "resources": {
+        "fb-config-rc": {
+            "depends_on": [
+                "fb-config-svc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "config",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "config-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 1,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "config",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "config",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "database_url",
+                                                "value": "jdbc:mysql://walle-master.c2gapem8vrrz.ap-southeast-1.rds.amazonaws.com:3306/configcenter?useUnicode=true&amp;characterEncoding=UTF-8"
+                                            },
+                                            {
+                                                "name": "database_username",
+                                                "value": "configcenter"
+                                            },
+                                            {
+                                                "name": "database_password",
+                                                "value": "CZe8bCjC299fWph6"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/config:v2.1.0_005",
+                                        "name": "config",
+                                        "ports": [],
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "1Gi"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                }
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-config-svc": {
+            "depends_on": [
+                "fb-dubbo-monitor-web-svc",
+                "fb-walle-java-svc-1",
+                "fb-walle-java-svc-2"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "labels": {
+                            "name": "config"
+                        },
+                        "name": "config",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "deprecatedPublicIPs": [
+                            "10.2.33.21"
+                        ],
+                        "ports": [
+                            {
+                                "port": 48082,
+                                "protocol": "TCP",
+                                "targetPort": 8080
+                            }
+                        ],
+                        "selector": {
+                            "name": "config"
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::Service"
+        },
+        "fb-data-services-rc": {
+            "depends_on": [
+                "fb-fbagent-service-rc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "data-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "data-service-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 3,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "data-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "data-service",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/data-services:v2.1.0_005",
+                                        "lifecycle": {
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/data-services/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "data-service",
+                                        "ports": [],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/data-services/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds(optional)": 3
+                                        },
+                                        "livenessProbe": {
+                                            "httpGet": {
+                                                "path(optional)": "/index.jsp",
+                                                "port": 8080,
+                                                "scheme(optional)": "HTTP",
+                                                "host(optional)": "127.0.0.1"
+                                            },
+                                            "initialDelaySeconds(optional)": 5,
+                                            "timeoutSeconds(optional)": 1
+                                        },
+                                        "resources(optional)": {
+                                            "limits": {
+                                                "memory": "3.5Gi"
+                                            }
+                                        },
+                                        "volumeMounts(optional)": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/data-services"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-dubbo-monitor-web-rc": {
+            "depends_on": [
+                "fb-config-rc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "dubbo-monitor-web",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "dubbo-monitor-web-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 1,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "dubbo-monitor-web",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "dubbo-monitor-web",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181?backup=10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/dubbo-monitor-web:v2.1.0_005",
+                                        "name": "dubbo-monitor-web",
+                                        "ports": [],
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "1Gi"
+                                            }
+                                        }
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                }
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-dubbo-monitor-web-svc": {
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "labels": {
+                            "name": "dubbo-monitor-web"
+                        },
+                        "name": "dubbo-monitor-web",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "containerPort": 8080,
+                        "deprecatedPublicIPs": [
+                            "10.2.33.21"
+                        ],
+                        "ports": [
+                            {
+                                "port": 48081,
+                                "protocol": "TCP",
+                                "targetPort": 8080
+                            }
+                        ],
+                        "selector": {
+                            "name": "dubbo-monitor-web"
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::Service"
+        },
+        "fb-fbagent-service-rc": {
+            "depends_on": [
+                "fb-rdb-rc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "fbagent-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "fbagent-service-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 2,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "fbagent-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "fbagent-service",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            },
+                                            {
+                                                "name": "HTTPS_PROXY_HOST",
+                                                "value": ""
+                                            },
+                                            {
+                                                "name": "HTTPS_PROXY_PORT",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/fbagent-services:v2.1.0_005",
+                                        "lifecycle": {
+                                            "postStart": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/bin/sh",
+                                                        "-c",
+                                                        "echo ok"
+                                                    ]
+                                                }
+                                            },
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/fbagent-services/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "fbagent-service",
+                                        "ports": [],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/fbagent-services/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "3.5Gi"
+                                            }
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/fbagent-service"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-mq-services-rc": {
+            "depends_on": [
+                "fb-fbagent-service-rc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "mq-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "mq-service-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 3,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "mq-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "mq-service",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/mq-services:v2.1.0_005",
+                                        "lifecycle": {
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/mq-services/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "mq-service",
+                                        "ports": [],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/mq-services/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "2Gi"
+                                            }
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/mq-services"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-rdb-rc": {
+            "depends_on": [
+                "fb-dubbo-monitor-web-rc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "rdb-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "rdb-service-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 5,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "rdb-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "rdb-service",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/rdb-services:v2.1.0_005",
+                                        "lifecycle": {
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/rdb-services/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "rdb-service",
+                                        "ports": [
+                                            {
+                                                "containerPort": 10001,
+                                                "hostPort": 10001,
+                                                "protocol": "TCP"
+                                            }
+                                        ],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/rdb-services/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "3Gi"
+                                            }
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/rdb"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-rulescript-services-rc": {
+            "depends_on": [
+                "fb-walle-java-rc-1",
+                "fb-walle-java-rc-2"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "rulescript-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "rulescript-service-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 3,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "rulescript-service",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "rulescript-service",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/rulescript-services:v2.1.0_005",
+                                        "lifecycle": {
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/rulescript-services/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "rulescript-service",
+                                        "ports": [],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/rulescript-services/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "3Gi"
+                                            }
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/rulescript-services"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-scheduler-rc": {
+            "depends_on": [
+                "fb-mq-services-rc",
+                "fb-data-services-rc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "scheduler",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "scheduler-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 2,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "scheduler",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "scheduler",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/scheduler:v2.1.0_005",
+                                        "lifecycle": {
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/scheduler/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "scheduler",
+                                        "ports": [],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/scheduler/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "1Gi"
+                                            }
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/scheduler"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-walle-java-rc-1": {
+            "depends_on": [
+                "fb-scheduler-rc"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "walle-java-1",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "walle-java-1-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 1,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "walle-java-1",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "walle-java-1",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/walle-java:v2.1.0_005",
+                                        "lifecycle": {
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/walle-java/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "walle-java",
+                                        "ports": [],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/walle-java/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "2Gi"
+                                            }
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/walle-java"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-walle-java-rc-2": {
+            "depends_on": [
+                "fb-walle-java-rc-1"
+            ],
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "ReplicationController",
+                    "metadata": {
+                        "labels": {
+                            "internalID": "78482600",
+                            "name": "walle-java-2",
+                            "version": "v2.1.0_005"
+                        },
+                        "name": "walle-java-2-78482600",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "replicas": 1,
+                        "selector": {
+                            "internalID": "78482600",
+                            "name": "walle-java-2",
+                            "version": "v2.1.0_005"
+                        },
+                        "template": {
+                            "metadata": {
+                                "labels": {
+                                    "internalID": "78482600",
+                                    "name": "walle-java-2",
+                                    "version": "v2.1.0_005"
+                                },
+                                "namespace": "facebook-pmd"
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "NEED_REMAIN_SSL_FILE",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "name": "ZK_ADDRESS",
+                                                "value": "10.2.35.10:2181,10.2.35.11:2181,10.2.35.12:2181"
+                                            },
+                                            {
+                                                "name": "LC_ALL",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANG",
+                                                "value": "en_US.UTF-8"
+                                            },
+                                            {
+                                                "name": "LANGUAGE",
+                                                "value": "en_US:en"
+                                            }
+                                        ],
+                                        "image": "172.30.10.195:5000/facebookpmd_pmdr_snapshots/walle-java:v2.1.0_005",
+                                        "lifecycle": {
+                                            "preStop": {
+                                                "exec": {
+                                                    "command": [
+                                                        "/dianyi/app/walle/walle-java/bin/stop.sh"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "name": "walle-java",
+                                        "ports": [],
+                                        "readinessProbe": {
+                                            "exec": {
+                                                "command": [
+                                                    "bash",
+                                                    "-c",
+                                                    "/dianyi/app/walle/walle-java/bin/readinessProbe.sh"
+                                                ]
+                                            },
+                                            "initialDelaySeconds": 3
+                                        },
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "2Gi"
+                                            }
+                                        },
+                                        "volumeMounts": [
+                                            {
+                                                "mountPath": "/dianyi/log",
+                                                "name": "host-log"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "nodeSelector": {
+                                    "usergroup": "pmd"
+                                },
+                                "volumes": [
+                                    {
+                                        "hostPath": {
+                                            "path": "/dianyi/log/walle-java"
+                                        },
+                                        "name": "host-log"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "rolling_updates": {
+                    "batch_percentage": 50,
+                    "pause_time": 5
+                },
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::ReplicationController"
+        },
+        "fb-walle-java-svc-1": {
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "labels": {
+                            "name": "walle-java-1"
+                        },
+                        "name": "walle-java-1",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "deprecatedPublicIPs": [
+                            "10.2.33.21"
+                        ],
+                        "ports": [
+                            {
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": 8080
+                            }
+                        ],
+                        "selector": {
+                            "name": "walle-java-1"
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::Service"
+        },
+        "fb-walle-java-svc-2": {
+            "properties": {
+                "apiversion": "v1",
+                "definition": {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "labels": {
+                            "name": "walle-java-2"
+                        },
+                        "name": "walle-java-2",
+                        "namespace": "facebook-pmd"
+                    },
+                    "spec": {
+                        "deprecatedPublicIPs": [
+                            "10.2.33.22"
+                        ],
+                        "ports": [
+                            {
+                                "port": 80,
+                                "protocol": "TCP",
+                                "targetPort": 8080
+                            }
+                        ],
+                        "selector": {
+                            "name": "walle-java-2"
+                        }
+                    }
+                },
+                "kubernetes_endpoint": "https://172.30.10.185:8080",
+                "namespace": "facebook-pmd",
+                "token": "84d1236909224db0ac5c17aa0867b3ba"
+            },
+            "type": "GoogleInc::Kubernetes::Service"
+        }
+    }
+}
